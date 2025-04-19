@@ -24,8 +24,8 @@ export default function Dashboard() {
         <OverviewCard title="To-Do List" progress={[10, 20]} />
         <OverviewCard title="Bucket List" progress={[30, 40]} />   
       </OverviewRow>
-      <RecentListCard title="Recent To-Do List" list={["할 일 1", "할 일 2", "할 일 3"]} />
-      <RecentListCard title="Recent Bucket List" list={["버킷 리스트 1", "버킷 리스트 2", "버킷 리스트 3"]} />
+      <RecentListCard title="Recent To-Do List" list={["TO-DO 1", "TO-DO 2", "TO-DO 3"]} />
+      <RecentListCard title="Recent Bucket List" list={["BUCKET 1", "BUCKET 2", "BUCKET 3"]} />
     </DashboardContainer>
   );
 }

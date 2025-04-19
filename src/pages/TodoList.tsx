@@ -1,3 +1,10 @@
-export default function TodoList() {
-  return <h1>Todo List</h1>;
+import ListView from "../components/ui/ListView";
+
+export default function ToDoList() {
+  return (
+    <div>
+      <h1>To-Do List</h1>
+      <ListView />
+    </div>
+  );
 }

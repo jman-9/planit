@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import Dashboard from "./pages/Dashboard";
 import BucketList from "./pages/BucketList";
-import TodoList from "./pages/TodoList";
+import ToDoList from "./pages/ToDoList";
 import Settings from "./pages/Settings";
 
 export default function App() {
@@ -14,7 +14,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/bucket" element={<BucketList />} />
-            <Route path="/todo" element={<TodoList />} />
+            <Route path="/todo" element={<ToDoList />} />
             <Route path="/settings" element={<Settings />} />
           </Routes>
         </main>
