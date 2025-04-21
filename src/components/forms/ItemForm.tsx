@@ -16,6 +16,7 @@ const Field = styled.div`
 export type ItemFormSubmit = (data: ItemFormData) => void;
 
 export interface ItemFormProps {
+  item?: ItemFormData;
   onSubmit: ItemFormSubmit;
   onCancel: () => void;
 }
@@ -48,24 +49,25 @@ function handleSubmit(e: React.FormEvent<HTMLFormElement>, onSubmit:ItemFormSubm
 }
 
 export default function ItemForm(props: ItemFormProps) {
+  console.log(props.item);
 
   return (
     <form onSubmit={(e) => handleSubmit(e, props.onSubmit)}>
       <Field>
         <label>Title</label>
-        <input type="text" name="title" />
+        <input type="text" name="title" defaultValue={props.item?.title} />
       </Field>
       <Field>
         <label>Start</label>
-        <input type="date" name="start" />
+        <input type="date" name="start" defaultValue={props.item?.start} />
       </Field>
       <Field>
         <label>End</label>
-        <input type="date" name="end" />
+        <input type="date" name="end" defaultValue={props.item?.end} />
       </Field>
       <Field>
         <label>Description</label>
-        <input type="text" name="desc" />
+        <input type="text" name="desc" defaultValue={props.item?.desc} />
       </Field>
       <button type="submit">OK</button>      
       <button type="button" onClick={props.onCancel}>Cancel</button>

@@ -1,8 +1,8 @@
 export interface ListItem {
   title: string;
-  status: 'todo' | 'pending' | 'in-progress' | 'completed';
-  updatedAt: string;   
-  createdAt: string; 
+  updatedAt: Date;   
+  createdAt: Date; 
+  status?: 'todo' | 'pending' | 'in-progress' | 'completed';  
   startedAt?: string;
   completedAt?: string;
   // metadata?: {

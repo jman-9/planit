@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import { ListItem } from "../types";
+import dayjs from "dayjs";
 
 const ListTable = styled.table`
   width: 100%;
@@ -32,7 +33,13 @@ const IconButton = styled.button`
   cursor: pointer;
 `;
 
-export default function ListView(props: { list: ListItem[] }) {
+export interface ListViewProps {
+  list: ListItem[];
+  onEdit: (item: ListItem, index: number) => void;
+  onDelete: (item: ListItem, index: number) => void;
+}
+
+export default function ListView(props: ListViewProps) {
   return (
     <ListTable>
       <thead>
@@ -46,16 +53,16 @@ export default function ListView(props: { list: ListItem[] }) {
         </tr>
       </thead>
       <tbody>      
-        {props.list.map((item) => (
+        {props.list.map((item, index) => (
           <tr>
             <td>{item.status}</td>
             <td>{item.title}</td>
-            <td>{item.createdAt}</td>
+            <td>{dayjs(item.createdAt).format('YYYY-MM-DD')}</td>
             <td>{item.startedAt}</td>
             <td>{item.completedAt}</td>
             <td>
-              <IconButton title="Edit">✏️</IconButton>
-              <IconButton title="Delete">🗑️</IconButton>
+              <IconButton title="Edit" onClick={() => props.onEdit(item, index)}>✏️</IconButton>
+              <IconButton title="Delete" onClick={() => props.onDelete(item, index)}>🗑️</IconButton>
             </td>
           </tr>
         ))}
