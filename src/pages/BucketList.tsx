@@ -1,4 +1,4 @@
-import ListView from "../components/ui/ListView";
+import ListView from "../components/ListView";
 import { ListItem } from "../types/ListItem";
 export default function BucketList() {
   const list: ListItem[] = [

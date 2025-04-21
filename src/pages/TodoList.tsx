@@ -1,4 +1,4 @@
-import ListView from "../components/ui/ListView";
+import ListView from "../components/ListView";
 import { useState } from "react";
 import Modal from "../components/ui/Modal";
 import ItemForm, { ItemFormData, ItemFormProps, ItemFormSubmit } from "../components/forms/ItemForm";

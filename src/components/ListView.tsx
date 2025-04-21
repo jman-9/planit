@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { ListItem } from "../../types";
+import { ListItem } from "../types";
 
 const ListTable = styled.table`
   width: 100%;
@@ -20,10 +20,6 @@ const ListTable = styled.table`
 
   tbody tr:hover {
     background: #f9f9f9;
-  }
-
-  td:last-child {
-    text-align: right;
   }
 `;
 
@@ -64,6 +60,6 @@ export default function ListView(props: { list: ListItem[] }) {
           </tr>
         ))}
       </tbody>
-    </ListTable>      
+    </ListTable>
   );
 }
