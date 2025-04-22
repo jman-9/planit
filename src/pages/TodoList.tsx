@@ -1,40 +1,15 @@
 import ListView, { ListViewProps } from "../components/ListView";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../components/ui/Modal";
 import ItemForm, { ItemFormData, ItemFormProps } from "../components/forms/ItemForm";
-import { ListItem } from "../types/ListItem";
+import { ListItem } from "../types";
+import { TodoAPI } from "../api/todoApi";
 
 
-const testList: ListItem[] = [
-  {
-    title: "TO-DO 1",
-    status: "todo",
-    updatedAt: new Date("2021-01-01"),
-    createdAt: new Date("2021-01-01"),
-    startedAt: "2021-01-01",
-    completedAt: "2021-01-01",
-  },
-  {
-    title: "TO-DO 2",
-    status: "todo",
-    updatedAt: new Date("2021-01-01"),
-    createdAt: new Date("2021-01-01"),
-    startedAt: "2021-01-01",
-    completedAt: "2021-01-01",
-  },
-  {
-    title: "TO-DO 3",
-    status: "todo",
-    updatedAt: new Date("2021-01-01"),
-    createdAt: new Date("2021-01-01"),
-    startedAt: "2021-01-01",
-    completedAt: "2021-01-01",
-  },
-];
-
-function useHandleListData(data: ListItem[], version: number) {
-  const [list, _] = useState(data);
-  const [listVersion, setListVersion] = useState(version);
+function useHandleListData() {
+  const getList = (): ListItem[] => {
+    return TodoAPI.getList();
+  }
 
   const addItem = (data: ItemFormData) => {
     const newData: ListItem = {      
@@ -44,42 +19,68 @@ function useHandleListData(data: ListItem[], version: number) {
       startedAt: data.start,
       completedAt: data.end,
     };
-    list.push(newData);
-    setListVersion(listVersion + 1);
+    TodoAPI.addItem(newData);
   }
 
-  const editItem = (data: ItemFormData, index: number) => {
-    if(index < 0 || index >= list.length) {
-      console.error("Invalid index:", index);
+  const editItem = (oldTitle: string, data: ItemFormData) => {
+    const item = TodoAPI.getItem(oldTitle);
+    if(!item) {
+      console.error("Invalid item title:", oldTitle);
       return;
     }
 
-    const newData: ListItem = { ...list[index],
+    const newData: ListItem = { ...item,
       title: data.title,
       updatedAt: new Date(),
       startedAt: data.start,
       completedAt: data.end,      
     };
-    list[index] = newData;
-    setListVersion(listVersion + 1);
+    TodoAPI.updateItem(oldTitle, newData);
   }
 
-  const deleteItem = (index: number) => {
-    if(index < 0 || index >= list.length) {
-      console.error("Invalid index:", index);
+  const deleteItem = (title: string) => {
+    const item = TodoAPI.getItem(title);
+    if(!item) {
+      console.error("Invalid item title:", title);
       return;
     }
-    list.splice(index, 1);
-    setListVersion(listVersion + 1);
+    TodoAPI.deleteItem(title);
   }
 
-  return { list, addItem, editItem, deleteItem };
+  return { getList, addItem, editItem, deleteItem };
 }
 
 export default function ToDoList() {
-  const {list, addItem, editItem, deleteItem} = useHandleListData(testList, 0);
+  const {getList, addItem, editItem, deleteItem} = useHandleListData();
   const [isAddOpen, setIsAddOpen] = useState(false);
-  const [curEditItem, setCurEditItem] = useState<{item: ItemFormData, index: number} | null>(null);
+  const [curEditItem, setCurEditItem] = useState<{oldTitle: string, item: ItemFormData} | null>(null);
+
+  useEffect(() => {
+    TodoAPI.addItem({
+      title: "TO-DO 1",
+      status: "todo",
+      updatedAt: new Date("2021-01-01"),
+      createdAt: new Date("2021-01-01"),
+      startedAt: "2021-01-01",
+      completedAt: "2021-01-01",
+    });
+    TodoAPI.addItem(  {
+      title: "TO-DO 2",
+      status: "todo",
+      updatedAt: new Date("2021-01-01"),
+      createdAt: new Date("2021-01-01"),
+      startedAt: "2021-01-01",
+      completedAt: "2021-01-01",
+    });
+    TodoAPI.addItem(  {
+    title: "TO-DO 3",
+    status: "todo",
+    updatedAt: new Date("2021-01-01"),
+    createdAt: new Date("2021-01-01"),
+    startedAt: "2021-01-01",
+      completedAt: "2021-01-01",
+    });
+  }, []);
 
   const addProps: ItemFormProps = {
     onSubmit: (d: ItemFormData) => { addItem(d); setIsAddOpen(false) }, 
@@ -87,24 +88,24 @@ export default function ToDoList() {
   };
 
   const editProps: ItemFormProps = {
-    onSubmit: (d: ItemFormData) => { editItem(d, curEditItem?.index ?? -1); setCurEditItem(null) }, 
-    onCancel: () => setCurEditItem(null) 
+    onSubmit: (d: ItemFormData) => { editItem(curEditItem?.oldTitle ?? "", d); setCurEditItem(null) }, 
+    onCancel: () => setCurEditItem(null)
   };  
 
   const listViewProps: ListViewProps = {
-    list: list,
-    onEdit: (item: ListItem, index: number) => {
+    list: getList(),
+    onEdit: (item: ListItem) => {
       const itemFormData: ItemFormData = {
         title: item.title,
         start: item.startedAt,
         end: item.completedAt,
         desc: "test",
       };
-      setCurEditItem({item: itemFormData, index: index});
+      setCurEditItem({oldTitle: item.title, item: itemFormData});
     },
-    onDelete: (_: ListItem, index: number) => {
+    onDelete: (item: ListItem) => {
       if(confirm("Are you sure you want to delete this item?"))
-        deleteItem(index);
+        deleteItem(item.title);
     }
   };
 

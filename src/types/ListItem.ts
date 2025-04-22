@@ -1,5 +1,5 @@
 export interface ListItem {
-  title: string;
+  title: string;  
   updatedAt: Date;   
   createdAt: Date; 
   status?: 'todo' | 'pending' | 'in-progress' | 'completed';  
@@ -9,4 +9,5 @@ export interface ListItem {
   //   priority?: 'low' | 'medium' | 'high';
   //   tags?: string[];
   // };
+  desc?: string;  
 }

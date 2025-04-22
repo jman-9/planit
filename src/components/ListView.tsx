@@ -35,8 +35,8 @@ const IconButton = styled.button`
 
 export interface ListViewProps {
   list: ListItem[];
-  onEdit: (item: ListItem, index: number) => void;
-  onDelete: (item: ListItem, index: number) => void;
+  onEdit: (item: ListItem) => void;
+  onDelete: (item: ListItem) => void;
 }
 
 export default function ListView(props: ListViewProps) {
@@ -53,7 +53,7 @@ export default function ListView(props: ListViewProps) {
         </tr>
       </thead>
       <tbody>      
-        {props.list.map((item, index) => (
+        {props.list.map((item) => (
           <tr>
             <td>{item.status}</td>
             <td>{item.title}</td>
@@ -61,8 +61,8 @@ export default function ListView(props: ListViewProps) {
             <td>{item.startedAt}</td>
             <td>{item.completedAt}</td>
             <td>
-              <IconButton title="Edit" onClick={() => props.onEdit(item, index)}>✏️</IconButton>
-              <IconButton title="Delete" onClick={() => props.onDelete(item, index)}>🗑️</IconButton>
+              <IconButton title="Edit" onClick={() => props.onEdit(item)}>✏️</IconButton>
+              <IconButton title="Delete" onClick={() => props.onDelete(item)}>🗑️</IconButton>
             </td>
           </tr>
         ))}
