@@ -1,4 +1,4 @@
-import { CommonCard } from "./ui/Card";
+import { CommonCard } from "../ui/Card";
 import { ListItem } from "../types";
 import { Link } from "react-router-dom";
 

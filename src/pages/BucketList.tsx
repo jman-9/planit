@@ -1,6 +1,6 @@
 import ListView, { ListViewProps } from "../components/ListView";
 import { useEffect, useState } from "react";
-import Modal from "../components/ui/Modal";
+import Modal from "../ui/Modal";
 import ItemForm, { ItemFormData, ItemFormProps } from "../components/forms/ItemForm";
 import { ListItem } from "../types";
 import { BucketApi } from "../api/bucketApi";

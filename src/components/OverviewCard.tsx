@@ -1,4 +1,4 @@
-import { CommonCard } from "./ui/Card";
+import { CommonCard } from "../ui/Card";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { Link } from "react-router-dom";
