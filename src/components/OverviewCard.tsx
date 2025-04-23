@@ -1,15 +1,13 @@
 import { CommonCard } from "./ui/Card";
-import {
-  CircularProgressbar,
-  buildStyles
-} from "react-circular-progressbar";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { Link } from "react-router-dom";
 
 
-export default function OverviewCard(props: { title: string, progress: number[] }) {
+export default function OverviewCard(props: { title: string, titleLink: string, progress: number[] }) {
   return (
     <CommonCard>
-      <h1>{props.title}</h1>
+      <Link to={props.titleLink}><h1>{props.title}</h1></Link>
       <p>{props.progress[0]} / {props.progress[1]} completed</p>
       <div style={{ margin: "0 auto", width: "120px", height: "120px" }}>
         <CircularProgressbar

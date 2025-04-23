@@ -5,8 +5,8 @@ export default function Sidebar() {
 
   const menu = [
     { label: "Dashboard", path: "/" },
+    { label: "To-Do List", path: "/todo" },    
     { label: "Bucket List", path: "/bucket" },
-    { label: "To-Do List", path: "/todo" },
     { label: "Settings", path: "/settings" },
   ];
 

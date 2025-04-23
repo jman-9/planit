@@ -22,4 +22,11 @@ export const TodoAPI = {
   deleteItem: (title: string) => {
     store.dispatch(deleteItem(title));
   },
+
+  getItemCount: (status?: 'todo' | 'in-progress' | 'completed'): number => {
+    if(status) {
+      return TodoAPI.getList().filter(item => item.status === status).length;
+    }
+    return TodoAPI.getList().length;
+  },
 };

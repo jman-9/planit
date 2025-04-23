@@ -1,3 +1,5 @@
+import { BucketApi } from "../api/bucketApi";
+import { TodoAPI } from "../api/todoApi";
 import OverviewCard from "../components/OverviewCard";
 import RecentListCard from "../components/RecentListCard";
 import styled from 'styled-components';
@@ -18,14 +20,23 @@ const OverviewRow = styled.div`
 `;
 
 export default function Dashboard() {
+  const todoTotalCount = TodoAPI.getItemCount();
+  const bucketTotalCount = BucketApi.getItemCount();
+
+  const todoCompletedCount = TodoAPI.getItemCount('completed');
+  const bucketCompletedCount = BucketApi.getItemCount('completed');
+  
+  const recentTodoList = TodoAPI.getList().slice(0, 3);
+  const recentBucketList = BucketApi.getList().slice(0, 3);
+
   return (
     <DashboardContainer>
       <OverviewRow>        
-        <OverviewCard title="To-Do List" progress={[10, 20]} />
-        <OverviewCard title="Bucket List" progress={[30, 40]} />   
+        <OverviewCard title="To-Do List" titleLink="/todo" progress={[todoCompletedCount, todoTotalCount]} />
+        <OverviewCard title="Bucket List" titleLink="/bucket" progress={[bucketCompletedCount, bucketTotalCount]} />   
       </OverviewRow>
-      <RecentListCard title="Recent To-Do List" list={["TO-DO 1", "TO-DO 2", "TO-DO 3"]} />
-      <RecentListCard title="Recent Bucket List" list={["BUCKET 1", "BUCKET 2", "BUCKET 3"]} />
+      <RecentListCard title="Recent To-Do List" titleLink="/todo" list={recentTodoList} />
+      <RecentListCard title="Recent Bucket List" titleLink="/bucket" list={recentBucketList} />
     </DashboardContainer>
   );
 }
