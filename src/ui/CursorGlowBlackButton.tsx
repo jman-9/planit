@@ -1,13 +1,13 @@
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 
-const BlackButton = styled.button`
+const BlackButton = styled.button<{$fontSize?: string; $glowSize?: string;}>`
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.8em 1em;
-  font-size: 1rem;
+  padding: 0.7em 1em;
+  font-size: ${({ $fontSize }) => $fontSize || '1rem'};
   font-weight: bold;
   border: none;
   border-radius: 8px;
@@ -18,6 +18,7 @@ const BlackButton = styled.button`
 
   --mouse-x: 50%;
   --mouse-y: 50%;
+  --glow-size: ${({ $glowSize }) => $glowSize || '110px'};
 
   z-index: 0;
 
@@ -26,7 +27,7 @@ const BlackButton = styled.button`
     position: absolute;
     inset: 0;
     background: radial-gradient(
-      circle 110px at var(--mouse-x) var(--mouse-y),
+      circle var(--glow-size) at var(--mouse-x) var(--mouse-y),
       rgba(255, 255, 255, 0.4) 0%,
       rgba(255, 255, 255, 0.4) 60%,
       transparent 100%
@@ -50,14 +51,13 @@ const BlackButton = styled.button`
   }
 `;
 
-interface InteractiveBlackButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface CursorGlowBlackButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
+  fontSize?: string;
+  glowSize?: string;
 }
 
-export function InteractiveBlackButton({
-  children,
-  ...props
-}: InteractiveBlackButtonProps) {
+export function CursorGlowBlackButton({children, fontSize, glowSize, ...props}: CursorGlowBlackButtonProps) {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const target = useRef({ x: 0, y: 0 });
   const current = useRef({ x: 0, y: 0 });
@@ -100,7 +100,7 @@ export function InteractiveBlackButton({
   };
 
   return (
-    <BlackButton ref={buttonRef} onMouseMove={handleMouseMove} {...props}>
+    <BlackButton ref={buttonRef} onMouseMove={handleMouseMove} $fontSize={fontSize} $glowSize={glowSize} {...props}>
       <span>{children}</span>
     </BlackButton>
   );

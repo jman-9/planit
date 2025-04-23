@@ -1,9 +1,10 @@
 import ListView, { ListViewProps } from "../components/ListView";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Modal from "../ui/Modal";
 import ItemForm, { ItemFormData, ItemFormProps } from "../components/forms/ItemForm";
 import { ListItem } from "../types";
 import { BucketApi } from "../api/bucketApi";
+import { CursorGlowBlackButton } from "../ui/CursorGlowBlackButton";
 
 function useHandleListData() {
   const getList = (): ListItem[] => {
@@ -11,7 +12,7 @@ function useHandleListData() {
   }
 
   const addItem = (data: ItemFormData) => {
-    const newData: ListItem = {      
+    const newData: ListItem = {
       title: data.title,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -32,7 +33,7 @@ function useHandleListData() {
       title: data.title,
       updatedAt: new Date(),
       startedAt: data.start,
-      completedAt: data.end,      
+      completedAt: data.end,
     };
     BucketApi.updateItem(oldTitle, newData);
   }
@@ -55,14 +56,14 @@ export default function BucketList() {
   const [curEditItem, setCurEditItem] = useState<{oldTitle: string, item: ItemFormData} | null>(null);
 
   const addProps: ItemFormProps = {
-    onSubmit: (d: ItemFormData) => { addItem(d); setIsAddOpen(false) }, 
-    onCancel: () => setIsAddOpen(false) 
+    onSubmit: (d: ItemFormData) => { addItem(d); setIsAddOpen(false) },
+    onCancel: () => setIsAddOpen(false)
   };
 
   const editProps: ItemFormProps = {
-    onSubmit: (d: ItemFormData) => { editItem(curEditItem?.oldTitle ?? "", d); setCurEditItem(null) }, 
+    onSubmit: (d: ItemFormData) => { editItem(curEditItem?.oldTitle ?? "", d); setCurEditItem(null) },
     onCancel: () => setCurEditItem(null)
-  };  
+  };
 
   const listViewProps: ListViewProps = {
     list: getList(),
@@ -84,7 +85,9 @@ export default function BucketList() {
   return (
     <div>
       <h1>Bucket List</h1>
-      <button title="Add" onClick={() => setIsAddOpen(true)}>Add</button>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem' }}>
+        <CursorGlowBlackButton title="Add" fontSize="0.9rem" glowSize="30px" onClick={() => setIsAddOpen(true)}>➕ Add</CursorGlowBlackButton>
+      </div>
       <ListView {...listViewProps} />
       {isAddOpen && <Modal onClose={() => setIsAddOpen(false)}><ItemForm {...addProps} /></Modal>}
       {curEditItem && <Modal onClose={() => setCurEditItem(null)}><ItemForm {...editProps} item={curEditItem.item} /></Modal>}
