@@ -13,7 +13,7 @@ export const BucketApi = {
 
   getItem: (title: string): ListItem | undefined => {
     return store.getState().buckets.list.find(item => item.title === title);
-  },    
+  },
 
   updateItem: (title: string, data: ListItem) => {
     store.dispatch(updateItem({ title, data }));

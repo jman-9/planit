@@ -9,7 +9,7 @@ const todoSlice = createSlice({
       const index = state.list.findIndex(item => item.title === action.payload.title);
       if (index < 0) {
         state.list.push(action.payload);
-      }            
+      }
     },
     updateItem: (state, action: PayloadAction<{ title: string, data: ListItem }>) => {
       const index = state.list.findIndex(item => item.title === action.payload.title);

@@ -52,7 +52,7 @@ export default function ListView(props: ListViewProps) {
           <th>Actions</th>
         </tr>
       </thead>
-      <tbody>      
+      <tbody>
         {props.list.map((item) => (
           <tr>
             <td>{item.status}</td>

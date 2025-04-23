@@ -25,15 +25,15 @@ export default function Dashboard() {
 
   const todoCompletedCount = TodoApi.getItemCount('completed');
   const bucketCompletedCount = BucketApi.getItemCount('completed');
-  
+
   const recentTodoList = TodoApi.getList().slice(0, 3);
   const recentBucketList = BucketApi.getList().slice(0, 3);
 
   return (
     <DashboardContainer>
-      <OverviewRow>        
+      <OverviewRow>
         <OverviewCard title="To-Do List" titleLink="/todo" progress={[todoCompletedCount, todoTotalCount]} />
-        <OverviewCard title="Bucket List" titleLink="/bucket" progress={[bucketCompletedCount, bucketTotalCount]} />   
+        <OverviewCard title="Bucket List" titleLink="/bucket" progress={[bucketCompletedCount, bucketTotalCount]} />
       </OverviewRow>
       <RecentListCard title="Recent To-Do List" titleLink="/todo" list={recentTodoList} />
       <RecentListCard title="Recent Bucket List" titleLink="/bucket" list={recentBucketList} />

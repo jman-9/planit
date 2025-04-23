@@ -23,8 +23,8 @@ export interface ItemFormProps {
 
 function handleSubmit(e: React.FormEvent<HTMLFormElement>, onSubmit:ItemFormSubmit) {
   e.preventDefault();
-  console.log(e); 
-  
+  console.log(e);
+
   const form = e.currentTarget;
 
   let title = (form.elements.namedItem("title") as HTMLInputElement)?.value;
@@ -69,7 +69,7 @@ export default function ItemForm(props: ItemFormProps) {
         <label>Description</label>
         <input type="text" name="desc" defaultValue={props.item?.desc} />
       </Field>
-      <button type="submit">OK</button>      
+      <button type="submit">OK</button>
       <button type="button" onClick={props.onCancel}>Cancel</button>
     </form>
   );
