@@ -54,33 +54,6 @@ export default function BucketList() {
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [curEditItem, setCurEditItem] = useState<{oldTitle: string, item: ItemFormData} | null>(null);
 
-  useEffect(() => {
-    BucketApi.addItem({
-      title: "BUCKET 1",
-      status: "todo",
-      updatedAt: new Date("2021-01-01"),
-      createdAt: new Date("2021-01-01"),
-      startedAt: "2021-01-01",
-      completedAt: "2021-01-01",
-    });
-    BucketApi.addItem({
-      title: "BUCKET 2",
-      status: "todo",
-      updatedAt: new Date("2021-01-01"),
-      createdAt: new Date("2021-01-01"),
-      startedAt: "2021-01-01",
-      completedAt: "2021-01-01",
-    });
-    BucketApi.addItem({
-      title: "BUCKET 3",
-      status: "todo",
-      updatedAt: new Date("2021-01-01"),
-      createdAt: new Date("2021-01-01"),
-      startedAt: "2021-01-01",
-      completedAt: "2021-01-01",
-    });
-  }, []);
-
   const addProps: ItemFormProps = {
     onSubmit: (d: ItemFormData) => { addItem(d); setIsAddOpen(false) }, 
     onCancel: () => setIsAddOpen(false) 
