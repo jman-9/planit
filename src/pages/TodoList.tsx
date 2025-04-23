@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 import Modal from "../components/ui/Modal";
 import ItemForm, { ItemFormData, ItemFormProps } from "../components/forms/ItemForm";
 import { ListItem } from "../types";
-import { TodoAPI } from "../api/todoApi";
+import { TodoApi } from "../api/todoApi";
 
 
 function useHandleListData() {
   const getList = (): ListItem[] => {
-    return TodoAPI.getList();
+    return TodoApi.getList();
   }
 
   const addItem = (data: ItemFormData) => {
@@ -19,11 +19,11 @@ function useHandleListData() {
       startedAt: data.start,
       completedAt: data.end,
     };
-    TodoAPI.addItem(newData);
+    TodoApi.addItem(newData);
   }
 
   const editItem = (oldTitle: string, data: ItemFormData) => {
-    const item = TodoAPI.getItem(oldTitle);
+    const item = TodoApi.getItem(oldTitle);
     if(!item) {
       console.error("Invalid item title:", oldTitle);
       return;
@@ -35,16 +35,16 @@ function useHandleListData() {
       startedAt: data.start,
       completedAt: data.end,      
     };
-    TodoAPI.updateItem(oldTitle, newData);
+    TodoApi.updateItem(oldTitle, newData);
   }
 
   const deleteItem = (title: string) => {
-    const item = TodoAPI.getItem(title);
+    const item = TodoApi.getItem(title);
     if(!item) {
       console.error("Invalid item title:", title);
       return;
     }
-    TodoAPI.deleteItem(title);
+    TodoApi.deleteItem(title);
   }
 
   return { getList, addItem, editItem, deleteItem };

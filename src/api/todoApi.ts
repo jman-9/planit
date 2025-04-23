@@ -2,7 +2,7 @@ import { store } from '../store/store';
 import { addItem, updateItem, deleteItem } from '../store/todoSlice';
 import { ListItem } from '../types';
 
-export const TodoAPI = {
+export const TodoApi = {
   getList: (): ListItem[] => {
     return store.getState().todos.list;
   },
@@ -25,8 +25,8 @@ export const TodoAPI = {
 
   getItemCount: (status?: 'todo' | 'in-progress' | 'completed'): number => {
     if(status) {
-      return TodoAPI.getList().filter(item => item.status === status).length;
+      return TodoApi.getList().filter(item => item.status === status).length;
     }
-    return TodoAPI.getList().length;
+    return TodoApi.getList().length;
   },
 };

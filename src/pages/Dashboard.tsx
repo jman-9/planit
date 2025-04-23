@@ -1,5 +1,5 @@
 import { BucketApi } from "../api/bucketApi";
-import { TodoAPI } from "../api/todoApi";
+import { TodoApi } from "../api/todoApi";
 import OverviewCard from "../components/OverviewCard";
 import RecentListCard from "../components/RecentListCard";
 import styled from 'styled-components';
@@ -20,13 +20,13 @@ const OverviewRow = styled.div`
 `;
 
 export default function Dashboard() {
-  const todoTotalCount = TodoAPI.getItemCount();
+  const todoTotalCount = TodoApi.getItemCount();
   const bucketTotalCount = BucketApi.getItemCount();
 
-  const todoCompletedCount = TodoAPI.getItemCount('completed');
+  const todoCompletedCount = TodoApi.getItemCount('completed');
   const bucketCompletedCount = BucketApi.getItemCount('completed');
   
-  const recentTodoList = TodoAPI.getList().slice(0, 3);
+  const recentTodoList = TodoApi.getList().slice(0, 3);
   const recentBucketList = BucketApi.getList().slice(0, 3);
 
   return (
