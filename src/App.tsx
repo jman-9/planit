@@ -4,12 +4,12 @@ import Dashboard from "./pages/Dashboard";
 import BucketList from "./pages/BucketList";
 import ToDoList from "./pages/ToDoList";
 import Settings from "./pages/Settings";
-import { TodoAPI } from "./api/todoApi";
-import { useEffect } from "react";
-import { BucketApi } from "./api/bucketApi";
+//import { TodoAPI } from "./api/todoApi";
+//import { useEffect } from "react";
+//import { BucketApi } from "./api/bucketApi";
 
 export default function App() {
-
+  /* 더미 데이터 입력 코드
   useEffect(() => {
     TodoAPI.addItem({
       title: "TO-DO 1",
@@ -60,6 +60,7 @@ export default function App() {
       completedAt: "2021-01-01",
     });
   }, []);
+  */
 
   return (
     <BrowserRouter>
