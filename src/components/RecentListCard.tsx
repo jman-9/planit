@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function RecentListCard(props: { title: string, titleLink: string, list: ListItem[] }) {
   return (
     <CommonCard>
-      <Link to={props.titleLink}><h1>{props.title}</h1></Link>
+      <h1><Link to={props.titleLink}>{props.title}</Link></h1>
       <ul style={{ listStyle: "none", padding: 0 }}>
         {props.list.map((item) => <li key={item.title}>{item.title}</li>)}
       </ul>

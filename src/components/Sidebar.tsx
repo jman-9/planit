@@ -1,4 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
+import styled from "styled-components";
+
+const SidebarLink = styled(Link)<{$isActive: boolean}>`&& {
+  color: ${({ $isActive }) => $isActive ? "#1e40af" : "inherit"};
+  font-weight: ${({ $isActive }) => $isActive ? "bold" : "inherit"};
+}`;
 
 export default function Sidebar() {
   const location = useLocation();
@@ -21,24 +27,20 @@ export default function Sidebar() {
         borderRight: "1px solid #ccc", // 구분선 느낌
       }}
     >
-      <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+      <Link to="/">
         <h2 style={{ marginBottom: "2rem" }}>📌 PlanIt</h2>
       </Link>
       <nav style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
         {menu.map(({ label, path }) => {
           const isActive = location.pathname === path;
           return (
-            <Link
+            <SidebarLink
               key={path}
               to={path}
-              style={{
-                color: isActive ? "#1e40af" : "#333",
-                fontWeight: isActive ? "bold" : "normal",
-                textDecoration: "none",
-              }}
+              $isActive={isActive}
             >
               {label}
-            </Link>
+            </SidebarLink>
           );
         })}
       </nav>

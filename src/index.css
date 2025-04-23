@@ -1,9 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&display=swap');
 
+/*
+#10b981 → 가장 자연스러운 선택
+#3b82f6 → 시각적으로 안정적
+#6366f1 → 감성적이지만 눈에 잘 띔  
+*/
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+a:visited {
+  color: inherit;
+}
+a:hover {
+  color: #6366f1;
+  text-shadow: 0 0 1px #6366f1;
+}
+a:visited:hover {
+  color: #6366f1;
+  text-shadow: 0 0 1px #6366f1;
 }
 
 body {
