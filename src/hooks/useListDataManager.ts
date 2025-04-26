@@ -9,7 +9,7 @@ export default function useListDataManager(listApi: ListApiInterface) {
   const [curViewEditMode, setCurViewEditMode] = useState<Mode | null>(null);
   const [curViewItem, setCurViewItem] = useState<{oldTitle: string, item: ItemFormData} | null>(null);
 
-  const getList = (): ListItem[] => listApi.getList();
+  const getList = (): ListItem[] | undefined => listApi.getList();
 
   const setViewEditMode = (mode: Mode | 'add' |null, item?: ListItem) => {
     let viewData: {oldTitle: string, item: ItemFormData} | null = null;

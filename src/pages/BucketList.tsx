@@ -1,9 +1,8 @@
 import ListView, { ListViewProps } from "../components/ListView";
 import Modal from "../ui/Modal";
-import { ItemFormData, ItemFormProps } from "../components/forms/ItemForm";
 import { ListItem } from "../types";
 import { CursorGlowBlackButton } from "../ui/CursorGlowBlackButton";
-import ItemViewEdit from "../components/ItemViewEdit";
+import ItemViewEdit, { ItemFormData, ItemFormProps } from "../components/ItemViewEdit";
 import useListDataManager from "../hooks/useListDataManager";
 import { BucketApi } from "../api/bucketApi";
 
@@ -16,7 +15,7 @@ export default function BucketList() {
   };
 
   const listViewProps: ListViewProps = {
-    list: ldm.getList(),
+    list: ldm.getList() ?? [],
     onView: (item: ListItem) => ldm.setViewEditMode('view', item),
     onEdit: (item: ListItem) => ldm.setViewEditMode("edit", item),
     onDelete: (item: ListItem) => {
