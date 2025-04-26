@@ -33,8 +33,16 @@ const IconButton = styled.button`
   cursor: pointer;
 `;
 
+const ClickableTd = styled.td`
+  cursor: pointer;
+  &:hover {
+    color: #3b82f6;
+  }
+`;
+
 export interface ListViewProps {
   list: ListItem[];
+  onView: (item: ListItem) => void;
   onEdit: (item: ListItem) => void;
   onDelete: (item: ListItem) => void;
 }
@@ -56,7 +64,7 @@ export default function ListView(props: ListViewProps) {
         {props.list.map((item) => (
           <tr>
             <td>{item.status}</td>
-            <td>{item.title}</td>
+            <ClickableTd onClick={() => props.onView(item)}>{item.title}</ClickableTd>
             <td>{dayjs(item.createdAt).format('YYYY-MM-DD')}</td>
             <td>{item.startedAt}</td>
             <td>{item.completedAt}</td>
