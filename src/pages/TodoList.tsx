@@ -5,9 +5,10 @@ import { ListItem } from "../types";
 import { CursorGlowBlackButton } from "../ui/CursorGlowBlackButton";
 import ItemViewEdit from "../components/ItemViewEdit";
 import useListDataManager from "../hooks/useListDataManager";
+import { TodoApi } from "../api/todoApi";
 
 export default function ToDoList() {
-  const ldm = useListDataManager().listDataManager;
+  const ldm = useListDataManager(TodoApi).listDataManager;
 
   const viewProps: ItemFormProps = {
     onSubmit: (d: ItemFormData) => ldm.reflectItem(d, ldm.curViewItem?.oldTitle),

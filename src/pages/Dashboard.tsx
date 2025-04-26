@@ -35,13 +35,21 @@ export default function Dashboard() {
   const recentTodoList = TodoApi.getList().slice(0, 3);
   const recentBucketList = BucketApi.getList().slice(0, 3);
 
-  const ldm = useListDataManager().listDataManager;
-  const viewProps: ItemFormProps = {
-    onSubmit: (d: ItemFormData) => ldm.reflectItem(d, ldm.curViewItem?.oldTitle),
-    onCancel: () => ldm.setViewEditMode(null),
+  const todoLdm = useListDataManager(TodoApi).listDataManager;
+  const bucketLdm = useListDataManager(BucketApi).listDataManager;
+  const todoViewProps: ItemFormProps = {
+    onSubmit: (d: ItemFormData) => todoLdm.reflectItem(d, todoLdm.curViewItem?.oldTitle),
+    onCancel: () => todoLdm.setViewEditMode(null),
   };
-  const handleItemClick = (item: ListItem) => {
-    ldm.setViewEditMode('view', item);
+  const bucketViewProps: ItemFormProps = {
+    onSubmit: (d: ItemFormData) => bucketLdm.reflectItem(d, bucketLdm.curViewItem?.oldTitle),
+    onCancel: () => bucketLdm.setViewEditMode(null),
+  };
+  const todoHandleItemClick = (item: ListItem) => {
+    todoLdm.setViewEditMode('view', item);
+  }
+  const bucketHandleItemClick = (item: ListItem) => {
+    bucketLdm.setViewEditMode('view', item);
   }
 
   return (
@@ -50,9 +58,10 @@ export default function Dashboard() {
         <OverviewCard title="To-Do List" titleLink="/todo" progress={[todoCompletedCount, todoTotalCount]} />
         <OverviewCard title="Bucket List" titleLink="/bucket" progress={[bucketCompletedCount, bucketTotalCount]} />
       </OverviewRow>
-      <RecentListCard title="Recent To-Do List" titleLink="/todo" list={recentTodoList} onItemClick={handleItemClick} />
-      <RecentListCard title="Recent Bucket List" titleLink="/bucket" list={recentBucketList} onItemClick={handleItemClick} />
-      {ldm.curViewEditMode !== null && <Modal onClose={() => ldm.setViewEditMode(null) }><ItemViewEdit mode={ldm.curViewEditMode} itemFormProps={{...viewProps, item: ldm.curViewItem?.item}} /></Modal>}
+      <RecentListCard title="Recent To-Do List" titleLink="/todo" list={recentTodoList} onItemClick={todoHandleItemClick} />
+      <RecentListCard title="Recent Bucket List" titleLink="/bucket" list={recentBucketList} onItemClick={bucketHandleItemClick} />
+      {todoLdm.curViewEditMode !== null && <Modal onClose={() => todoLdm.setViewEditMode(null) }><ItemViewEdit mode={todoLdm.curViewEditMode} itemFormProps={{...todoViewProps, item: todoLdm.curViewItem?.item}} /></Modal>}
+      {bucketLdm.curViewEditMode !== null && <Modal onClose={() => bucketLdm.setViewEditMode(null) }><ItemViewEdit mode={bucketLdm.curViewEditMode} itemFormProps={{...bucketViewProps, item: bucketLdm.curViewItem?.item}} /></Modal>}
     </DashboardContainer>
   );
 }
