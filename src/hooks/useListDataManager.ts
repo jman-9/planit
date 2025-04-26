@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { Mode } from "../components/ItemViewEdit";
 import { ListItem } from "../types";
-import { TodoApi } from "../api/todoApi";
 import { ItemFormData } from "../components/forms/ItemForm";
+import { ListApiInterface } from "../api/types";
 
 
-export default function useListDataManager() {
+export default function useListDataManager(listApi: ListApiInterface) {
   const [curViewEditMode, setCurViewEditMode] = useState<Mode | null>(null);
   const [curViewItem, setCurViewItem] = useState<{oldTitle: string, item: ItemFormData} | null>(null);
 
-  const getList = (): ListItem[] => TodoApi.getList();
+  const getList = (): ListItem[] => listApi.getList();
 
   const setViewEditMode = (mode: Mode | 'add' |null, item?: ListItem) => {
     let viewData: {oldTitle: string, item: ItemFormData} | null = null;
@@ -38,26 +38,26 @@ export default function useListDataManager() {
     };
 
     if(!oldTitle) {
-      TodoApi.addItem(newData);
+      listApi.addItem(newData);
     } else {
-      const item = TodoApi.getItem(oldTitle);
+      const item = listApi.getItem(oldTitle);
       if(!item) {
         console.error("Invalid item title:", oldTitle);
         return;
       }
-      TodoApi.updateItem(oldTitle, newData);
+      listApi.updateItem(oldTitle, newData);
     }
 
     setViewEditMode(null);
   }
 
   const deleteItem = (title: string) => {
-    const item = TodoApi.getItem(title);
+    const item = listApi.getItem(title);
     if(!item) {
       console.error("Invalid item title:", title);
       return;
     }
-    TodoApi.deleteItem(title);
+    listApi.deleteItem(title);
   }
 
   return { listDataManager: {getList, curViewItem, curViewEditMode, setViewEditMode, reflectItem, deleteItem} };

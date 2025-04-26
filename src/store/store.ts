@@ -1,12 +1,12 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import todoReducer from './todoSlice';
-import bucketReducer from './bucketSlice';
+import todoSlice from './todoSlice';
+import bucketSlice from './bucketSlice';
 
 const rootReducer = combineReducers({
-  todos: todoReducer,
-  buckets: bucketReducer,
+  todos: todoSlice.reducer,
+  buckets: bucketSlice.reducer,
 });
 
 const persistConfig = {

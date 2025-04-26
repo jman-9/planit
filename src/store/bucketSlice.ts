@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ListItem } from '../types/ListItem';
+import { ListSlice } from './types';
 
-const bucketSlice = createSlice({
+const bucketSlice: ListSlice = createSlice({
   name: 'buckets',
   initialState: { list: [] as ListItem[] },
   reducers: {
@@ -23,5 +24,4 @@ const bucketSlice = createSlice({
   }
 });
 
-export const { addItem, updateItem, deleteItem } = bucketSlice.actions;
-export default bucketSlice.reducer;
+export default bucketSlice;

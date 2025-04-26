@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ListItem } from '../types/ListItem';
+import { ListSlice } from './types';
 
-const todoSlice = createSlice({
+const todoSlice: ListSlice = createSlice({
   name: 'todos',
   initialState: { list: [] as ListItem[] },
   reducers: {
@@ -23,5 +24,4 @@ const todoSlice = createSlice({
   }
 });
 
-export const { addItem, updateItem, deleteItem } = todoSlice.actions;
-export default todoSlice.reducer;
+export default todoSlice;
