@@ -2,7 +2,7 @@ import { useState } from "react";
 import ItemForm, { ItemFormProps } from "./forms/ItemForm";
 import { styled } from "styled-components";
 
-type Mode = "view" | "edit";
+export type Mode = "view" | "edit";
 
 interface ItemViewEditProps {
   mode: Mode;
@@ -12,26 +12,31 @@ interface ItemViewEditProps {
 const Field = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
 `;
+
+const FieldLabel = styled.label`
+  font-weight: bold;
+`;
+
 
 function InternalItemViewEdit({internalProps, onChange}: {internalProps: ItemViewEditProps, onChange: (mode: Mode) => void}) {
   const viewContent = (
     <div>
       <Field>
-        <label>Title</label>
+        <FieldLabel>Title</FieldLabel>
         <p>{internalProps.itemFormProps.item?.title}</p>
       </Field>
       <Field>
-        <label>Start</label>
+        <FieldLabel>Start</FieldLabel>
         <p>{internalProps.itemFormProps.item?.start}</p>
       </Field>
       <Field>
-        <label>End</label>
+        <FieldLabel>End</FieldLabel>
         <p>{internalProps.itemFormProps.item?.end}</p>
       </Field>
       <Field>
-        <label>Description</label>
+        <FieldLabel>Description</FieldLabel>
         <p>{internalProps.itemFormProps.item?.desc}</p>
       </Field>
       <button onClick={() => onChange("edit")}>Edit</button>
