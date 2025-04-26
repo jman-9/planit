@@ -1,13 +1,17 @@
 import { useState } from "react";
 import ItemForm, { ItemFormProps } from "./forms/ItemForm";
 import { styled } from "styled-components";
-
+import RoundedButton from "../ui/RoundedButton";
 export type Mode = "view" | "edit";
 
 interface ItemViewEditProps {
   mode: Mode;
   itemFormProps: ItemFormProps;
 }
+
+const ViewEditContainer = styled.div`
+  min-width: max(40vw, 350px);
+`;
 
 const Field = styled.div`
   display: flex;
@@ -19,34 +23,47 @@ const FieldLabel = styled.label`
   font-weight: bold;
 `;
 
+const FieldText = styled.p`
+  font-weight: 100;
+  white-space: pre-wrap;
+`;
+
+const TitleText = styled.p`
+  font-weight: normal;
+  white-space: pre-wrap;
+`;
+
 
 function InternalItemViewEdit({internalProps, onChange}: {internalProps: ItemViewEditProps, onChange: (mode: Mode) => void}) {
   const viewContent = (
-    <div>
+    <ViewEditContainer>
       <Field>
         <FieldLabel>Title</FieldLabel>
-        <p>{internalProps.itemFormProps.item?.title}</p>
+        <TitleText>{internalProps.itemFormProps.item?.title}</TitleText>
       </Field>
       <Field>
         <FieldLabel>Start</FieldLabel>
-        <p>{internalProps.itemFormProps.item?.start}</p>
+        <FieldText>{internalProps.itemFormProps.item?.start}</FieldText>
       </Field>
       <Field>
         <FieldLabel>End</FieldLabel>
-        <p>{internalProps.itemFormProps.item?.end}</p>
+        <FieldText>{internalProps.itemFormProps.item?.end}</FieldText>
       </Field>
       <Field>
         <FieldLabel>Description</FieldLabel>
-        <p>{internalProps.itemFormProps.item?.desc}</p>
+        <FieldText>{internalProps.itemFormProps.item?.desc}</FieldText>
       </Field>
-      <button onClick={() => onChange("edit")}>Edit</button>
-    </div>
+      <div style={{display: 'flex', justifyContent: 'flex-end', gap: '0.5rem'}}>
+        <RoundedButton size="small" onClick={() => onChange("edit")}><span style={{fontSize: '0.6em', marginRight: '0.5rem'}}>🖊️</span> Edit</RoundedButton>
+        <RoundedButton size="small" onClick={() => internalProps.itemFormProps.onCancel()}>Close</RoundedButton>
+      </div>
+    </ViewEditContainer>
   );
 
   const editContent = (
-    <div>
+    <ViewEditContainer>
       <ItemForm {...internalProps.itemFormProps} />
-    </div>
+    </ViewEditContainer>
   );
 
   return internalProps.mode === "view" ? viewContent : editContent;

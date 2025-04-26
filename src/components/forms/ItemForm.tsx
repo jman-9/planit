@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import RoundedButton from "../../ui/RoundedButton";
 
 export interface ItemFormData {
   title: string;
@@ -10,7 +11,7 @@ export interface ItemFormData {
 const Field = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
 `;
 
 export type ItemFormSubmit = (data: ItemFormData) => void;
@@ -49,28 +50,28 @@ function handleSubmit(e: React.FormEvent<HTMLFormElement>, onSubmit:ItemFormSubm
 }
 
 export default function ItemForm(props: ItemFormProps) {
-  console.log(props.item);
-
   return (
     <form onSubmit={(e) => handleSubmit(e, props.onSubmit)}>
       <Field>
         <label>Title</label>
-        <input type="text" name="title" defaultValue={props.item?.title} />
+        <textarea style={{padding: '0.5rem' }} name="title" defaultValue={props.item?.title} />
       </Field>
       <Field>
         <label>Start</label>
-        <input type="date" name="start" defaultValue={props.item?.start} />
+        <input style={{maxWidth: '8rem'}} type="date" name="start" defaultValue={props.item?.start} />
       </Field>
       <Field>
         <label>End</label>
-        <input type="date" name="end" defaultValue={props.item?.end} />
+        <input style={{maxWidth: '8rem'}} type="date" name="end" defaultValue={props.item?.end} />
       </Field>
       <Field>
         <label>Description</label>
-        <input type="text" name="desc" defaultValue={props.item?.desc} />
+        <textarea style={{padding: '0.5rem', height: '7rem'}} name="desc" defaultValue={props.item?.desc} />
       </Field>
-      <button type="submit">OK</button>
-      <button type="button" onClick={props.onCancel}>Cancel</button>
+      <div style={{display: 'flex', justifyContent: 'flex-end', gap: '0.5rem'}}>
+        <RoundedButton size="small" type="submit">OK</RoundedButton>
+        <RoundedButton size="small" type="button" onClick={props.onCancel}>Cancel</RoundedButton>
+      </div>
     </form>
   );
 }

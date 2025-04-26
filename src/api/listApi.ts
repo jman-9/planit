@@ -26,9 +26,9 @@ export default function ListApi(listSlice: ListSlice): ListApiInterface {
 
   const getItemCount = (status?: 'todo' | 'in-progress' | 'completed'): number => {
     if(status) {
-      return getList()?.filter(item => item.status === status).length || -1;
+      return getList()?.filter(item => item.status === status).length || 0;
     }
-    return getList()?.length || -1;
+    return getList()?.length || 0;
   };
 
   return { getList, addItem, getItem, updateItem, deleteItem, getItemCount };

@@ -24,9 +24,10 @@ const Overlay = styled.div`
 const ModalBox = styled.div`
   background: white;
   border-radius: 12px;
-  padding: 2rem;
+  padding: 1.25rem;
+  padding-top: 1.5rem;
   min-width: 300px;
-  max-width: 90vw;
+  max-width: min(90vw, 1000px);
   max-height: 90vh;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   z-index: 1001;
@@ -46,7 +47,7 @@ const CloseButton = styled.button`
 
 export default function Modal({ children, onClose }: ModalProps) {
   return (
-    <Overlay onClick={onClose}>
+    <Overlay>
       <ModalBox onClick={(e) => e.stopPropagation()}>
         <CloseButton onClick={onClose}>×</CloseButton>
         {children}
