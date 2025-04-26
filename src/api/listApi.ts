@@ -4,8 +4,8 @@ import { ListApiInterface } from './types';
 import { ListSlice } from '../store/types';
 
 export default function ListApi(listSlice: ListSlice): ListApiInterface {
-  const getList = (): ListItem[] => {
-    return store.getState()[listSlice.name].list as ListItem[];
+  const getList = (): ListItem[] | undefined => {
+    return (store.getState() as any)[listSlice.name]?.list;
   };
 
   const addItem = (data: ListItem) => {
@@ -13,7 +13,7 @@ export default function ListApi(listSlice: ListSlice): ListApiInterface {
   };
 
   const getItem = (title: string): ListItem | undefined => {
-    return getList().find((item: ListItem) => item.title === title);
+    return getList()?.find((item: ListItem) => item.title === title);
   };
 
   const updateItem = (title: string, data: ListItem) => {
@@ -26,9 +26,9 @@ export default function ListApi(listSlice: ListSlice): ListApiInterface {
 
   const getItemCount = (status?: 'todo' | 'in-progress' | 'completed'): number => {
     if(status) {
-      return getList().filter(item => item.status === status).length;
+      return getList()?.filter(item => item.status === status).length || -1;
     }
-    return getList().length;
+    return getList()?.length || -1;
   };
 
   return { getList, addItem, getItem, updateItem, deleteItem, getItemCount };

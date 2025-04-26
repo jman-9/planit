@@ -32,8 +32,8 @@ export default function Dashboard() {
   const todoCompletedCount = TodoApi.getItemCount('completed');
   const bucketCompletedCount = BucketApi.getItemCount('completed');
 
-  const recentTodoList = TodoApi.getList().slice(0, 3);
-  const recentBucketList = BucketApi.getList().slice(0, 3);
+  const recentTodoList = TodoApi.getList()?.slice(0, 3);
+  const recentBucketList = BucketApi.getList()?.slice(0, 3);
 
   const todoLdm = useListDataManager(TodoApi).listDataManager;
   const bucketLdm = useListDataManager(BucketApi).listDataManager;
@@ -58,8 +58,8 @@ export default function Dashboard() {
         <OverviewCard title="To-Do List" titleLink="/todo" progress={[todoCompletedCount, todoTotalCount]} />
         <OverviewCard title="Bucket List" titleLink="/bucket" progress={[bucketCompletedCount, bucketTotalCount]} />
       </OverviewRow>
-      <RecentListCard title="Recent To-Do List" titleLink="/todo" list={recentTodoList} onItemClick={todoHandleItemClick} />
-      <RecentListCard title="Recent Bucket List" titleLink="/bucket" list={recentBucketList} onItemClick={bucketHandleItemClick} />
+      <RecentListCard title="Recent To-Do List" titleLink="/todo" list={recentTodoList || []} onItemClick={todoHandleItemClick} />
+      <RecentListCard title="Recent Bucket List" titleLink="/bucket" list={recentBucketList || []} onItemClick={bucketHandleItemClick} />
       {todoLdm.curViewEditMode !== null && <Modal onClose={() => todoLdm.setViewEditMode(null) }><ItemViewEdit mode={todoLdm.curViewEditMode} itemFormProps={{...todoViewProps, item: todoLdm.curViewItem?.item}} /></Modal>}
       {bucketLdm.curViewEditMode !== null && <Modal onClose={() => bucketLdm.setViewEditMode(null) }><ItemViewEdit mode={bucketLdm.curViewEditMode} itemFormProps={{...bucketViewProps, item: bucketLdm.curViewItem?.item}} /></Modal>}
     </DashboardContainer>

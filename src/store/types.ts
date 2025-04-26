@@ -4,8 +4,8 @@ import { ListItem } from '../types';
 export type ListSlice = Slice<
   { list: ListItem[] },
   {
-    addItem: (state: any, action: any) => void,
-    updateItem: (state: any, action: any) => void,
-    deleteItem: (state: any, action: any) => void
+    addItem: (state: { list: ListItem[] }, action: { payload: ListItem; type: string }) => void,
+    updateItem: (state: { list: ListItem[] }, action: { payload: { title: string, data: ListItem }; type: string }) => void,
+    deleteItem: (state: { list: ListItem[] }, action: { payload: string; type: string }) => void
   }
 >;
