@@ -45,6 +45,7 @@ export default function useListDataManager(listApi: ListApiInterface) {
         console.error("Invalid item title:", oldTitle);
         return;
       }
+      newData.createdAt = item.createdAt;
       listApi.updateItem(oldTitle, newData);
     }
 
