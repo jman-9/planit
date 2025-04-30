@@ -54,9 +54,9 @@ export default function ListView(props: ListViewProps) {
         <tr>
           <th>Status</th>
           <th>Title</th>
-          <th>Created At</th>
-          <th>Start</th>
-          <th>Due</th>
+          <th>Created</th>
+          <th>Started</th>
+          <th>Completed</th>
           <th>Actions</th>
         </tr>
       </thead>
