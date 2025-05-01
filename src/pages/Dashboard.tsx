@@ -29,8 +29,8 @@ export default function Dashboard() {
   const todoTotalCount = TodoApi.getItemCount();
   const bucketTotalCount = BucketApi.getItemCount();
 
-  const todoCompletedCount = TodoApi.getItemCount('completed');
-  const bucketCompletedCount = BucketApi.getItemCount('completed');
+  const todoCompletedCount = TodoApi.getItemCount('Done');
+  const bucketCompletedCount = BucketApi.getItemCount('Done');
 
   const recentTodoList = TodoApi.getList()?.slice(0, 3);
   const recentBucketList = BucketApi.getList()?.slice(0, 3);

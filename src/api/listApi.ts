@@ -1,5 +1,5 @@
 import { store } from '../store/store';
-import { ListItem } from '../types';
+import { getStatus, ListItem, ListItemStatus } from '../types';
 import { ListApiInterface } from './types';
 import { ListSlice } from '../store/types';
 
@@ -24,9 +24,9 @@ export default function ListApi(listSlice: ListSlice): ListApiInterface {
     store.dispatch(listSlice.actions.deleteItem(title));
   };
 
-  const getItemCount = (status?: 'todo' | 'in-progress' | 'completed'): number => {
+  const getItemCount = (status?: ListItemStatus): number => {
     if(status) {
-      return getList()?.filter(item => item.status === status).length || 0;
+      return getList()?.filter(item => getStatus(item) === status).length || 0;
     }
     return getList()?.length || 0;
   };

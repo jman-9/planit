@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { ListItem } from "../types";
+import { getStatus, ListItem } from "../types";
 import dayjs from "dayjs";
 
 const ListTable = styled.table`
@@ -74,10 +74,11 @@ export interface ListViewProps {
 }
 
 function resolveStatus(item: ListItem) {
-  if(item.completedAt) {
+  const status = getStatus(item);
+  if(status === 'Done') {
     return <StatusBadge color="#065f46" backgroundColor="#d1fae5"><ForceVerticalAlign><StatusEmoji>✅</StatusEmoji>Done</ForceVerticalAlign></StatusBadge>;
   }
-  if(item.startedAt) {
+  if(status === 'In Progress') {
     return <StatusBadge color="#92400e" backgroundColor="#fef3c7"><ForceVerticalAlign><StatusEmoji>⏳</StatusEmoji>In Progress</ForceVerticalAlign></StatusBadge>;
   }
   return <StatusBadge color="#374151" backgroundColor="#f3f4f6"><ForceVerticalAlign><StatusEmoji>📝</StatusEmoji>To Do</ForceVerticalAlign></StatusBadge>;

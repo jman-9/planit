@@ -1,4 +1,4 @@
-import { ListItem } from "../types";
+import { ListItem, ListItemStatus } from "../types";
 
 export interface ListApiInterface {
   getList: () => ListItem[] | undefined;
@@ -6,5 +6,5 @@ export interface ListApiInterface {
   getItem: (title: string) => ListItem | undefined;
   updateItem: (title: string, data: ListItem) => void;
   deleteItem: (title: string) => void;
-  getItemCount: (status?: 'todo' | 'in-progress' | 'completed') => number;
+  getItemCount: (status?: ListItemStatus) => number;
 }
