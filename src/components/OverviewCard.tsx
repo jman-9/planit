@@ -12,7 +12,7 @@ export default function OverviewCard(props: { title: string, titleLink: string, 
       <div style={{ margin: "0 auto", width: "120px", height: "120px" }}>
         <CircularProgressbar
           value={props.progress[0] / props.progress[1] * 100}
-        text={(props.progress[0] / props.progress[1] * 100) + '%'}
+        text={Math.round(props.progress[0] / props.progress[1] * 100) + '%'}
         styles={buildStyles({
           pathColor: "#4caf50",
           textColor: "#333",
