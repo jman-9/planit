@@ -41,11 +41,11 @@ const ClickableTd = styled.td`
 `;
 
 const StatusBadge = styled.span<{ color: string, backgroundColor: string }>`
-  display: inline-flex;
+  display: inline-block;
   align-items: center;
+  justify-content: center;
   vertical-align: middle;
-  padding: 0.05em 0.50em;
-  font-size: inherit;
+  padding: 0.05em 0.60em;
   line-height: 1;
   font-weight: 500;
   border-radius: 9999px;
@@ -56,9 +56,13 @@ const StatusBadge = styled.span<{ color: string, backgroundColor: string }>`
 const StatusEmoji = styled.span`
   display: inline-block;
   font-size: 1rem;
+  width: 1.6rem;
   background: none;
   border: none;
-  margin-right: 0.25em;
+`;
+
+const ForceVerticalAlign = styled.span`
+  display: inline-block;
   transform: translateY(2px);
 `;
 
@@ -71,12 +75,12 @@ export interface ListViewProps {
 
 function resolveStatus(item: ListItem) {
   if(item.completedAt) {
-    return <StatusBadge color="#065f46" backgroundColor="#d1fae5"><StatusEmoji>✅</StatusEmoji> Done</StatusBadge>;
+    return <StatusBadge color="#065f46" backgroundColor="#d1fae5"><ForceVerticalAlign><StatusEmoji>✅</StatusEmoji>Done</ForceVerticalAlign></StatusBadge>;
   }
   if(item.startedAt) {
-    return <StatusBadge color="#92400e" backgroundColor="#fef3c7"><StatusEmoji>⏳</StatusEmoji> In Progress</StatusBadge>;
+    return <StatusBadge color="#92400e" backgroundColor="#fef3c7"><ForceVerticalAlign><StatusEmoji>⏳</StatusEmoji>In Progress</ForceVerticalAlign></StatusBadge>;
   }
-  return <StatusBadge color="#374151" backgroundColor="#f3f4f6"><StatusEmoji>📝</StatusEmoji> To Do</StatusBadge>;
+  return <StatusBadge color="#374151" backgroundColor="#f3f4f6"><ForceVerticalAlign><StatusEmoji>📝</StatusEmoji>To Do</ForceVerticalAlign></StatusBadge>;
 }
 
 export default function ListView(props: ListViewProps) {
