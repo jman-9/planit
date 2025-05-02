@@ -4,15 +4,15 @@ import "react-circular-progressbar/dist/styles.css";
 import { Link } from "react-router-dom";
 
 
-export default function OverviewCard(props: { title: string, titleLink: string, progress: number[] }) {
+export default function OverviewCard(p: { title: string, titleLink: string, done: number, total: number }) {
   return (
     <CommonCard>
-      <h1><Link to={props.titleLink}>{props.title}</Link></h1>
-      <p>{props.progress[0]} / {props.progress[1]} completed</p>
+      <h1><Link to={p.titleLink}>{p.title}</Link></h1>
+      <p>{p.done} / {p.total} completed</p>
       <div style={{ margin: "0 auto", width: "120px", height: "120px" }}>
         <CircularProgressbar
-          value={props.progress[0] / props.progress[1] * 100}
-        text={Math.round(props.progress[0] / props.progress[1] * 100) + '%'}
+          value={p.total !== 0 ? p.done / p.total * 100 : 0}
+          text={p.total !== 0 ? Math.round(p.done / p.total * 100) + '%' : '-'}
         styles={buildStyles({
           pathColor: "#4caf50",
           textColor: "#333",

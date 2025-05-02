@@ -6,8 +6,7 @@ import styled from 'styled-components';
 import { ListItem } from "../types";
 import useListDataManager from "../hooks/useListDataManager";
 import Modal from "../ui/Modal";
-import ItemViewEdit from "../components/ItemViewEdit";
-import { ItemFormProps, ItemFormData } from "../components/forms/ItemForm";
+import ItemViewEdit, { ItemFormData, ItemFormProps } from "../components/ItemViewEdit";
 
 
 const DashboardContainer = styled.div`
@@ -55,8 +54,8 @@ export default function Dashboard() {
   return (
     <DashboardContainer>
       <OverviewRow>
-        <OverviewCard title="To-Do List" titleLink="/todo" progress={[todoCompletedCount, todoTotalCount]} />
-        <OverviewCard title="Bucket List" titleLink="/bucket" progress={[bucketCompletedCount, bucketTotalCount]} />
+        <OverviewCard title="To-Do List" titleLink="/todo" done={todoCompletedCount} total={todoTotalCount} />
+        <OverviewCard title="Bucket List" titleLink="/bucket" done={bucketCompletedCount} total={bucketTotalCount} />
       </OverviewRow>
       <RecentListCard title="Recent To-Do List" titleLink="/todo" list={recentTodoList || []} onItemClick={todoHandleItemClick} />
       <RecentListCard title="Recent Bucket List" titleLink="/bucket" list={recentBucketList || []} onItemClick={bucketHandleItemClick} />
