@@ -1,8 +1,9 @@
 {
-  "name": "plan-it",
+  "name": "planit",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "workspaces": ["apps/*"],
   "scripts": {
     "dev": "vite --host",
     "build": "tsc -b && vite build",
@@ -19,7 +20,7 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.5.0",
     "redux-persist": "^6.0.0",
-    "styled-components": "^6.1.17"
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",

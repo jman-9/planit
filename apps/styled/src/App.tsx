@@ -6,7 +6,6 @@ import TodoList from "./pages/TodoList";
 import Settings from "./pages/Settings";
 
 export default function App() {
-
   return (
     <BrowserRouter>
       <div style={{ display: "flex" }}>
