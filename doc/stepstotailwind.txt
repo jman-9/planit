@@ -1,4 +1,9 @@
 1. sidebar - C
-2. dashboard
-3. todo
-4. bucket
+2. dashboard layout - C
+3. todo layout
+4. bucket layout
+5. hooks
+6. ui
+7. dashboard logic
+8. todo logic
+9. bucket logic
