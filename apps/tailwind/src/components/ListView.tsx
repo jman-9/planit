@@ -41,7 +41,7 @@ function resolveStatus(item: ListItem) {
   if(status === 'In Progress') {
     return <StatusBadge className="text-amber-800 bg-amber-100" Emoji="⏳" text="In Progress" />;
   }
-  return <StatusBadge className="text-gray-700 bg-gray-100" Emoji="📝" text="To Do" />;
+  return <StatusBadge className="text-gray-700 bg-gray-200" Emoji="📝" text="To Do" />;
 }
 
 export default function ListView(props: ListViewProps) {

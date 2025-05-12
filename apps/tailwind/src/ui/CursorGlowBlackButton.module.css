@@ -1,0 +1,20 @@
+.glowButton::before {
+
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle var(--glow-size, 10px) at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0.4) 60%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.9s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.glowButton:hover::before {
+  opacity: 1;
+}
