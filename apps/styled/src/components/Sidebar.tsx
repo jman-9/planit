@@ -20,11 +20,11 @@ export default function Sidebar() {
     <aside
       style={{
         width: "240px",
-        backgroundColor: "#f5f5f5",  // 밝은 배경
-        color: "#333",               // 어두운 글자색
+        backgroundColor: "#f5f5f5",
+        color: "#333",
         padding: "1rem",
         minHeight: "100vh",
-        borderRight: "1px solid #ccc", // 구분선 느낌
+        borderRight: "1px solid #ccc",
       }}
     >
       <Link to="/">

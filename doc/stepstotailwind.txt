@@ -1,4 +1,4 @@
-1. sidebar
+1. sidebar - C
 2. dashboard
 3. todo
 4. bucket

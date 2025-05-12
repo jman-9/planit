@@ -1,6 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
 
-
 export default function Sidebar() {
   const location = useLocation();
 
@@ -20,7 +19,7 @@ export default function Sidebar() {
         {menu.map(({ label, path }) => {
           const isActive = location.pathname === path;
           return (
-            <Link className={`${isActive ? "text-blue-800 font-bold" : ""}`} key={path} to={path}>
+            <Link className={isActive ? "text-blue-800 font-bold" : ""} key={path} to={path}>
               {label}
             </Link>
           );
