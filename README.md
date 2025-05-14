@@ -8,7 +8,7 @@ A personal task planner built with React, TypeScript, and Vite.
 - Bucket list management
 - State management with Redux Toolkit
 - REST-style API abstraction over local storage
-- Modular UI built with Tailwind CSS V4 (currently retaining some legacy styled-components)
+- Modular UI built with Tailwind CSS V4
 - Responsive design for all devices
 - Clean project structure for easy scaling
 
@@ -17,20 +17,31 @@ A personal task planner built with React, TypeScript, and Vite.
 - **Frontend Framework**: React with TypeScript
 - **Build Tool**: Vite
 - **Package Manager**: pnpm
-- **Styling**: styled-components (migrating to Tailwind CSS)
+- **Styling**: Tailwind CSS V4
 - **State Management**: Redux Toolkit
+
+## Monorepo Layout
+
+The codebase is structured in a monorepo-like format for scalability:
+```
+├── apps/          # Contains the main applications
+│ ├── styled/      # Main app built with styled-component (legacy)
+│ └── tailwind/    # Main app built with Tailwind CSS V4
+├── public/        # Sharing public resources
+├── packages/      # Reserved for future shared libraries or utilities
+```
 
 ## Project Structure
 
 ```
 src/
-├── components/     # Reusable UI components
-├── features/      # Feature-specific components
+├── api/           # API modules
+├── components/    # Reusable UI components
 ├── hooks/         # Custom React hooks
+├── pages/         # page components
 ├── store/         # Redux store configuration
 ├── types/         # TypeScript type definitions
-├── ui/            # UI components and styles
-└── utils/         # Utility functions
+└── ui/            # UI components and styles
 ```
 
 ## Getting Started
@@ -44,7 +55,7 @@ src/
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/jman/planit.git
+git clone https://github.com/jman-9/planit.git
 cd planit
 ```
 
@@ -55,6 +66,7 @@ pnpm install
 
 3. Start the development server:
 ```bash
+cd apps/tailwind
 pnpm dev
 ```
 
