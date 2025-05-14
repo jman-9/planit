@@ -35,11 +35,11 @@ The codebase is structured in a monorepo-like format for scalability:
 
 ```
 src/
-├── api/           # API modules
+├── api/           # API modules and abstractions
 ├── components/    # Reusable UI components
 ├── hooks/         # Custom React hooks
-├── pages/         # page components
-├── store/         # Redux store configuration
+├── pages/         # Route-level components
+├── store/         # RTK store and slices
 ├── types/         # TypeScript type definitions
 └── ui/            # UI components and styles
 ```
