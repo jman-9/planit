@@ -8,7 +8,7 @@ A personal task planner built with React, TypeScript, and Vite.
 - Bucket list management
 - State management with Redux Toolkit
 - REST-style API abstraction over local storage
-- Modular UI built with Tailwind CSS (currently retaining some legacy styled-components)
+- Modular UI built with Tailwind CSS V4 (currently retaining some legacy styled-components)
 - Responsive design for all devices
 - Clean project structure for easy scaling
 
