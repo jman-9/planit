@@ -1,9 +1,16 @@
 # PlanIt
-
 A personal task planner built with React, TypeScript, and Vite.
 
-## Features
 
+## 📸 Screenshots
+![Screenshot 01](./public/screenshot01.jpg)
+
+![Screenshot 02](./public/screenshot02.jpg)
+
+![Screenshot 03](./public/screenshot03.jpg)
+
+
+## Features
 - Task tracking with status and dates
 - Bucket list management
 - State management with Redux Toolkit
@@ -12,16 +19,16 @@ A personal task planner built with React, TypeScript, and Vite.
 - Responsive design for all devices
 - Clean project structure for easy scaling
 
-## Tech Stack
 
+## Tech Stack
 - **Frontend Framework**: React with TypeScript
 - **Build Tool**: Vite
 - **Package Manager**: pnpm
 - **Styling**: Tailwind CSS V4
 - **State Management**: Redux Toolkit
 
-## Monorepo Layout
 
+## Monorepo Layout
 The codebase is structured in a monorepo-like format for scalability:
 ```
 ├── apps/          # Contains the main applications
@@ -31,8 +38,8 @@ The codebase is structured in a monorepo-like format for scalability:
 ├── packages/      # Reserved for future shared libraries or utilities
 ```
 
-## Project Structure
 
+## Project Structure
 ```
 src/
 ├── api/           # API modules and abstractions
@@ -44,15 +51,14 @@ src/
 └── ui/            # UI components and styles
 ```
 
+
 ## Getting Started
-
 ### Prerequisites
-
 - Node.js (v16 or higher)
 - pnpm (v8 or higher)
 
-### Installation
 
+### Installation
 1. Clone the repository:
 ```bash
 git clone https://github.com/jman-9/planit.git
@@ -72,10 +78,10 @@ pnpm dev
 
 4. Open your browser and navigate to `http://localhost:5173`
 
-## Contributing
 
+## Contributing
 Open a Pull Request
 
-## License
 
+## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
