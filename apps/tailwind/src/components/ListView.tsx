@@ -11,11 +11,11 @@ export interface ListViewProps {
 
 
 function LvTh({children, className, ...rest}: {children: React.ReactNode, className?: string} & React.ThHTMLAttributes<HTMLTableCellElement>) {
-  return <th className={`border-b border-[#eee] text-left px-4 py-3 ${className}`} {...rest}>{children}</th>;
+  return <th className={`border-b border-[#eee] text-left px-4 py-3 dark:border-[#555] ${className}`} {...rest}>{children}</th>;
 }
 
 function LvTd({children, className, ...rest}: {children: React.ReactNode, className?: string} & React.TdHTMLAttributes<HTMLTableCellElement>) {
-  return <td className={`border-b border-[#eee] text-left px-4 py-3 ${className}`} {...rest}>{children}</td>;
+  return <td className={`border-b border-[#eee] text-left px-4 py-3 dark:border-[#555] ${className}`} {...rest}>{children}</td>;
 }
 
 function LvButton({children, ...rest}: {children: React.ReactNode} & React.ButtonHTMLAttributes<HTMLButtonElement>) {
@@ -36,18 +36,18 @@ function StatusBadge(props: { className: string, Emoji: string, text: string }) 
 function resolveStatus(item: ListItem) {
   const status = getStatus(item);
   if(status === 'Done') {
-    return <StatusBadge className="text-emerald-800 bg-emerald-100" Emoji="✅" text="Done" />;
+    return <StatusBadge className="text-emerald-800 bg-emerald-100 dark:text-emerald-200 dark:bg-emerald-900" Emoji="✅" text="Done" />;
   }
   if(status === 'In Progress') {
-    return <StatusBadge className="text-amber-800 bg-amber-100" Emoji="⏳" text="In Progress" />;
+    return <StatusBadge className="text-amber-800 bg-amber-100 dark:text-amber-200 dark:bg-amber-900" Emoji="⏳" text="In Progress" />;
   }
-  return <StatusBadge className="text-gray-700 bg-gray-200" Emoji="📝" text="To Do" />;
+  return <StatusBadge className="text-gray-700 bg-gray-200 dark:text-gray-200 dark:bg-gray-700" Emoji="📝" text="To Do" />;
 }
 
 export default function ListView(props: ListViewProps) {
   return (
     <table className="w-full border-collapse text-2xl">
-      <thead className="bg-gray-100 font-bold text-2xl">
+      <thead className="bg-gray-100 font-bold text-2xl dark:bg-gray-800">
         <tr>
           <LvTh>Status</LvTh>
           <LvTh>Title</LvTh>
@@ -57,11 +57,11 @@ export default function ListView(props: ListViewProps) {
           <LvTh>Actions</LvTh>
         </tr>
       </thead>
-      <tbody className="hover:bg-gray-100">
+      <tbody className="hover:bg-gray-100 dark:hover:bg-gray-700">
         {props.list.map((item) => (
           <tr>
             <LvTd>{resolveStatus(item)}</LvTd>
-            <LvTd className="cursor-pointer hover:text-blue-500" onClick={() => props.onView(item)}>{item.title}</LvTd>
+            <LvTd className="cursor-pointer hover:text-blue-500 dark:hover:text-blue-300" onClick={() => props.onView(item)}>{item.title}</LvTd>
             <LvTd>{dayjs(item.createdAt).format('YYYY-MM-DD')}</LvTd>
             <LvTd>{item.startedAt}</LvTd>
             <LvTd>{item.completedAt}</LvTd>

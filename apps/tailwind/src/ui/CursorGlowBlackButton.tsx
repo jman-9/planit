@@ -49,5 +49,5 @@ export function CursorGlowBlackButton({children, fontSize, glowSize, ...props}: 
     target.current = { x, y };
   };
 
-  return <button ref={buttonRef} onMouseMove={handleMouseMove} style={{fontFamily:'Inter',fontSize, ['--glow-size' as any]: glowSize}} className={`relative inline-flex items-center justify-center px-4 py-3 font-bold bg-black text-white border-none rounded-lg cursor-pointer overflow-hidden z-0 ${styles.glowButton}`} {...props}><span className="relative gap-2 z-2">{children}</span></button>;
+  return <button ref={buttonRef} onMouseMove={handleMouseMove} style={{fontFamily:'Inter',fontSize, ['--glow-size' as any]: glowSize}} className={`relative inline-flex items-center justify-center px-4 py-3 font-bold bg-black text-white border-0 dark:border-2 dark:border-amber-500 rounded-lg cursor-pointer overflow-hidden z-0 ${styles.glowButton}`} {...props}><span className="relative gap-2 z-2">{children}</span></button>;
 }
