@@ -15,7 +15,7 @@ export default function ToDoList() {
   };
 
   const listViewProps: ListViewProps = {
-    list: ldm.getList() ?? [ { title: "Test", status: "Done", createdAt: "2021-01-01", startedAt: "2021-01-01", completedAt: "2021-01-01" } ],
+    list: ldm.getList() ?? [],
     onView: (item: ListItem) => ldm.setViewEditMode('view', item),
     onEdit: (item: ListItem) => ldm.setViewEditMode("edit", item),
     onDelete: (item: ListItem) => {
