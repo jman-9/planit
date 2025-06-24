@@ -24,5 +24,5 @@ const sizeStyles = {
 };
 
 export default function RoundedButton({size, children, ...rest}: {size: ButtonSize, children: React.ReactNode} & React.ButtonHTMLAttributes<HTMLButtonElement>) {
-  return <button className="inline-flex items-center justify-center overflow-hidden font-thin border-1 border-gray-800 rounded-lg  bg-transparent cursor-pointer transition-colors duration-300 ease-in-out hover:border-cyan-600" style={sizeStyles[size ?? 'medium']} {...rest}>{children}</button>;
+  return <button className="inline-flex items-center justify-center overflow-hidden font-thin border-1 border-gray-800 rounded-lg  bg-transparent cursor-pointer transition-colors duration-300 ease-in-out hover:border-cyan-600 dark:border-gray-400 dark:hover:border-cyan-300" style={sizeStyles[size ?? 'medium']} {...rest}>{children}</button>;
 }
