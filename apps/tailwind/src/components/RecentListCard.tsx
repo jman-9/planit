@@ -28,7 +28,7 @@ export default function RecentListCard(props: { title: string, titleLink: string
     <CommonCard>
       <h1><Link to={props.titleLink}>{props.title}</Link></h1>
       <ul className="list-none p-0">
-        {props.list.map((item) => <li className="cursor-pointer hover:text-blue-500" key={item.title} onClick={() => props.onItemClick(item)}>{RenderRow(item)}</li>)}
+        {props.list.map((item) => <li className="cursor-pointer hover:text-blue-500 dark:hover:text-blue-300" key={item.title} onClick={() => props.onItemClick(item)}>{RenderRow(item)}</li>)}
       </ul>
     </CommonCard>
   );

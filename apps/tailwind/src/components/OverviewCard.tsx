@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 
 export default function OverviewCard(p: { title: string, titleLink: string, done: number, total: number }) {
+  const isDark = document.documentElement.classList.contains("dark");
   return (
     <CommonCard>
       <h2><Link to={p.titleLink}>{p.title}</Link></h2>
@@ -15,8 +16,8 @@ export default function OverviewCard(p: { title: string, titleLink: string, done
           text={p.total !== 0 ? Math.round(p.done / p.total * 100) + '%' : '-'}
           styles={buildStyles({
             pathColor: "#4caf50",
-            textColor: "#333",
-            trailColor: "#eee",
+            textColor: isDark ? "#eee" : "#333",
+            trailColor: isDark ? "#666" : "#eee",
             textSize: "30px",
             })}
         />
