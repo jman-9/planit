@@ -3,17 +3,22 @@ A personal task planner built with React, TypeScript, and Vite.
 
 
 ## 📸 Screenshots
-![Screenshot 01](./public/screenshot01.jpg)
+![Screenshot 01](./docs/screenshots/screenshot01.jpg)
 
-![Screenshot 02](./public/screenshot02.jpg)
+![Screenshot 02](./docs/screenshots/screenshot02.jpg)
 
-![Screenshot 03](./public/screenshot03.jpg)
+![Screenshot 03](./docs/screenshots/screenshot03.jpg)
+
+![Screenshot 04](./docs/screenshots/screenshot04.png)
+
+![Screenshot 05](./docs/screenshots/screenshot05.png)
 
 
 ## Features
 - Task tracking with status and dates
 - Bucket list management
 - State management with Redux Toolkit
+- Dark mode toggle with full Tailwind theming
 - REST-style API abstraction over local storage
 - Modular UI built with Tailwind CSS V4
 - Responsive design for all devices
@@ -25,7 +30,7 @@ A personal task planner built with React, TypeScript, and Vite.
 - **Build Tool**: Vite
 - **Package Manager**: pnpm
 - **Styling**: Tailwind CSS V4
-- **State Management**: Redux Toolkit
+- **State Management**: Redux Toolkit + redux-persist
 
 
 ## Monorepo Layout
