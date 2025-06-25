@@ -1,11 +1,20 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
 import Sidebar from "./components/Sidebar";
 import Dashboard from "./pages/Dashboard";
 import TodoList from "./pages/TodoList";
 import BucketList from "./pages/BucketList";
 import Settings from "./pages/Settings";
+import { store } from "./store/store";
+
 
 export default function App() {
+  useEffect(() => {
+    const theme = (store.getState() as any)?.settings?.theme ?? "light";
+    const root = document.documentElement;
+    root.classList.toggle("dark", theme === "dark");
+  }, []);
+
   return (
     <BrowserRouter>
       <div className="flex">

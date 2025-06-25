@@ -3,10 +3,17 @@ import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, 
 import storage from 'redux-persist/lib/storage';
 import todoSlice from './todoSlice';
 import bucketSlice from './bucketSlice';
+import settingsSlice from './settingsSlice';
+
+const settingsPersistConfig = {
+  key: 'settings',
+  storage,
+};
 
 const rootReducer = combineReducers({
   todos: todoSlice.reducer,
   buckets: bucketSlice.reducer,
+  settings: persistReducer(settingsPersistConfig, settingsSlice.reducer),
 });
 
 const persistConfig = {
