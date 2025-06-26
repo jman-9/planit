@@ -14,6 +14,7 @@ function LvTh({children, className, ...rest}: {children: React.ReactNode, classN
   return <th className={`border-b border-[#eee] text-left px-4 py-3 dark:border-[#555] ${className}`} {...rest}>{children}</th>;
 }
 
+
 function LvTd({children, className, ...rest}: {children: React.ReactNode, className?: string} & React.TdHTMLAttributes<HTMLTableCellElement>) {
   return <td className={`border-b border-[#eee] text-left px-4 py-3 dark:border-[#555] ${className}`} {...rest}>{children}</td>;
 }
@@ -46,32 +47,34 @@ function resolveStatus(item: ListItem) {
 
 export default function ListView(props: ListViewProps) {
   return (
-    <table className="w-full border-collapse text-2xl">
-      <thead className="bg-gray-100 font-bold text-2xl dark:bg-gray-800">
-        <tr>
-          <LvTh>Status</LvTh>
-          <LvTh>Title</LvTh>
-          <LvTh>Created</LvTh>
-          <LvTh>Started</LvTh>
-          <LvTh>Completed</LvTh>
-          <LvTh>Actions</LvTh>
-        </tr>
-      </thead>
-      <tbody className="hover:bg-gray-100 dark:hover:bg-gray-700">
-        {props.list.map((item) => (
+    <div className="overflow-x-auto">
+      <table className="border-collapse text-2xl">
+        <thead className="bg-gray-100 font-bold dark:bg-gray-800">
           <tr>
-            <LvTd>{resolveStatus(item)}</LvTd>
-            <LvTd className="cursor-pointer hover:text-blue-500 dark:hover:text-blue-300" onClick={() => props.onView(item)}>{item.title}</LvTd>
-            <LvTd>{dayjs(item.createdAt).format('YYYY-MM-DD')}</LvTd>
-            <LvTd>{item.startedAt}</LvTd>
-            <LvTd>{item.completedAt}</LvTd>
-            <LvTd>
-              <LvButton title="Edit" onClick={() => props.onEdit(item)}>✏️</LvButton>
-              <LvButton title="Delete" onClick={() => props.onDelete(item)}>🗑️</LvButton>
-            </LvTd>
+            <LvTh>Status</LvTh>
+            <LvTh>Title</LvTh>
+            <LvTh>Created</LvTh>
+            <LvTh>Started</LvTh>
+            <LvTh>Completed</LvTh>
+            <LvTh>Actions</LvTh>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {props.list.map((item) => (
+            <tr className="hover:bg-gray-100 dark:hover:bg-gray-700">
+              <LvTd className="whitespace-nowrap">{resolveStatus(item)}</LvTd>
+              <LvTd className="whitespace-nowrap truncate max-w-3xs cursor-pointer hover:text-blue-500 dark:hover:text-blue-300" onClick={() => props.onView(item)}>{item.title}</LvTd>
+              <LvTd>{dayjs(item.createdAt).format('YYYY-MM-DD')}</LvTd>
+              <LvTd>{item.startedAt}</LvTd>
+              <LvTd>{item.completedAt}</LvTd>
+              <LvTd>
+                <LvButton title="Edit" onClick={() => props.onEdit(item)}>✏️</LvButton>
+                <LvButton title="Delete" onClick={() => props.onDelete(item)}>🗑️</LvButton>
+              </LvTd>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }

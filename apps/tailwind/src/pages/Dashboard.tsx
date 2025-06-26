@@ -36,8 +36,8 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="p-8 max-w-7xl mx-auto flex flex-col gap-8">
-      <div className="flex gap-8 [&>*]:flex-1">
+    <div className="p-8 max-w-full mx-auto flex flex-col gap-8">
+      <div className="flex flex-col gap-4 min-[500px]:flex-row min-[500px]:gap-8 min-[500px]:[&>*]:flex-1">
         <OverviewCard title="To-Do List" titleLink="/todo" done={todoCompletedCount} total={todoTotalCount} />
         <OverviewCard title="Bucket List" titleLink="/bucket" done={bucketCompletedCount} total={bucketTotalCount} />
       </div>

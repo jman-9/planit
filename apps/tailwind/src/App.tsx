@@ -17,9 +17,9 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <div className="flex">
+      <div className="flex min-h-screen dark:bg-gray-950 dark:text-gray-100">
         <Sidebar />
-        <div className="flex flex-1 flex-col dark:bg-gray-950 dark:text-gray-100">
+        <div className="min-w-0 max-w-[900px] flex flex-1 flex-col">
           <main className="flex-1 p-4">
             <Routes>
               <Route path="/" element={<Dashboard />} />

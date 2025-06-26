@@ -25,7 +25,7 @@ export interface ItemViewEditProps {
 
 type ChildrenType = {children: React.ReactNode};
 
-const ViewEditContainer = ({children}: ChildrenType) => <div className="min-w-[max(40vw,350px)]">{children}</div>;
+const ViewEditContainer = ({children}: ChildrenType) => <div className="">{children}</div>;
 const Field = ({children}: ChildrenType) => <div className="flex flex-col mb-5">{children}</div>;
 const FieldLabel = ({children}: ChildrenType) => <p className="font-bold">{children}</p>;
 const FieldText = ({children}: {children: React.ReactNode}) => <p className="font-thin whitespace-pre-wrap">{children}</p>;
@@ -79,7 +79,7 @@ function InternalItemViewEdit({internalProps, onChange}: {internalProps: ItemVie
         <FieldText>{internalProps.itemFormProps.item?.desc}</FieldText>
       </Field>
       <div style={{display: 'flex', justifyContent: 'flex-end', gap: '0.5rem'}}>
-        <RoundedButton size="small" onClick={() => onChange("edit")}><span style={{fontSize: '0.6em', marginRight: '0.5rem'}}>🖊️</span> Edit</RoundedButton>
+        <RoundedButton size="small" onClick={() => onChange("edit")}><span style={{fontSize: '0.6em', marginRight: '0.5rem'}}>🖍️</span> Edit</RoundedButton>
         <RoundedButton size="small" onClick={() => internalProps.itemFormProps.onCancel()}>Close</RoundedButton>
       </div>
     </ViewEditContainer>
