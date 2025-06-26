@@ -7,6 +7,7 @@ import { ListApiInterface } from "../api/types";
 export default function useListDataManager(listApi: ListApiInterface) {
   const [curViewEditMode, setCurViewEditMode] = useState<Mode | null>(null);
   const [curViewItem, setCurViewItem] = useState<{oldTitle: string, item: ItemFormData} | null>(null);
+  const [updateFlag, setUpdateFlag] = useState(false);
 
   const getList = (): ListItem[] | undefined => listApi.getList();
 
@@ -24,6 +25,7 @@ export default function useListDataManager(listApi: ListApiInterface) {
 
     setCurViewEditMode(mode === 'add' ? 'edit' : mode);
     setCurViewItem(viewData);
+    setUpdateFlag(!updateFlag);
   }
 
   const reflectItem = (data: ItemFormData, oldTitle?: string) => {
@@ -49,6 +51,7 @@ export default function useListDataManager(listApi: ListApiInterface) {
     }
 
     setViewEditMode(null);
+    setUpdateFlag(!updateFlag);
   }
 
   const deleteItem = (title: string) => {
@@ -58,6 +61,7 @@ export default function useListDataManager(listApi: ListApiInterface) {
       return;
     }
     listApi.deleteItem(title);
+    setUpdateFlag(!updateFlag);
   }
 
   return { listDataManager: {getList, curViewItem, curViewEditMode, setViewEditMode, reflectItem, deleteItem} };
