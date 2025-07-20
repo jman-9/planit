@@ -1,0 +1,21 @@
+{
+  "name": "planit-electron",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "pnpm exec tsc",
+    "dev": "concurrently \"pnpm --dir ../tailwind dev\" \"tsup --watch\" \"wait-on dist/preload.js dist/main.js && electronmon dist/main.js\""
+  },
+  "dependencies": {
+    "cross-env": "^7.0.3",
+    "electron": "^37.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.14",
+    "concurrently": "^9.2.0",
+    "electronmon": "^2.0.3",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3",
+    "wait-on": "^8.0.3"
+  }
+}
