@@ -1,1 +1,1 @@
-export * from './ListItem';
+export * from '@planit/shared/ListItem';

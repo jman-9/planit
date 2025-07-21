@@ -10,5 +10,4 @@ contextBridge.exposeInMainWorld('api', {
   getItem: () => ipcRenderer.invoke('getItem'),
   updateItem: () => ipcRenderer.invoke('updateItem'),
   deleteItem: () => ipcRenderer.invoke('deleteItem'),
-  getItemCount: () => ipcRenderer.invoke('getItemCount'),
 });
