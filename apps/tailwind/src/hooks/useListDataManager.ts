@@ -31,8 +31,8 @@ export default function useListDataManager(listApi: ListApiInterface) {
   const reflectItem = async (data: ItemFormData, oldTitle?: string) => {
     const newData: ListItem = {
       title: data.title,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
       startedAt: data.start,
       completedAt: data.end,
       desc: data.desc,

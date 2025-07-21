@@ -1,7 +1,7 @@
 export interface ListItem {
   title: string;
-  updatedAt: Date;
-  createdAt: Date;
+  updatedAt: string;
+  createdAt: string;
   startedAt?: string;
   completedAt?: string;
   // metadata?: {
