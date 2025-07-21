@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Mode, ItemFormData } from "../components/ItemViewEdit";
-import { ListItem } from "../types";
+import { ListItem } from "@planit/shared/ListItem";
 import { ListApiInterface } from "../api/types";
 
 

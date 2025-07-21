@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ListItem } from '../types/ListItem';
+import { ListItem } from '@planit/shared/ListItem';
 import { ListSlice } from './types';
 
 const todoSlice: ListSlice = createSlice({

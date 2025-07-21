@@ -1,5 +1,5 @@
 import CommonCard from "../ui/Card";
-import { getStatus, ListItem, ListItemStatus } from "../types";
+import { getStatus, ListItem, ListItemStatus } from "@planit/shared/ListItem";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import relativeTime from 'dayjs/plugin/relativeTime';

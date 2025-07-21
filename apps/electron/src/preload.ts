@@ -1,5 +1,6 @@
 import { contextBridge, ipcRenderer } from 'electron';
-import { ListItem } from '../../../packages/shared/ListItem';
+import { ListItem } from '@planit/shared/ListItem';
+
 
 contextBridge.exposeInMainWorld('env', {
   isElectron: true,

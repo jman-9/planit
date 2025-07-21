@@ -1,4 +1,4 @@
-import { getStatus, ListItem, ListItemStatus } from '../types';
+import { getStatus, ListItem, ListItemStatus } from '@planit/shared/ListItem';
 import { ListApiInterface } from './types';
 
 export default function ElectronListApi(): ListApiInterface {

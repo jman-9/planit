@@ -1,7 +1,7 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
-//import { ListItem } from '@planit/shared/ListItem';
-import { ListItem } from '../../../packages/shared/ListItem';
+import { ListItem } from '@planit/shared/ListItem';
+
 
 const isDev = process.env.MODE !== 'build';
 

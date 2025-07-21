@@ -1,6 +1,6 @@
 import ListView, { ListViewProps } from "../components/ListView";
 import Modal from "../ui/Modal";
-import { ListItem } from "../types";
+import { ListItem } from "@planit/shared/ListItem";
 import { CursorGlowBlackButton } from "../ui/CursorGlowBlackButton";
 import ItemViewEdit, { ItemFormData, ItemFormProps } from "../components/ItemViewEdit";
 import useListDataManager from "../hooks/useListDataManager";

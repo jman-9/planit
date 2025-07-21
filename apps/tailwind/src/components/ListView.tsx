@@ -1,4 +1,4 @@
-import { getStatus, ListItem } from "../types";
+import { getStatus, ListItem } from '@planit/shared/ListItem';
 import dayjs from "dayjs";
 
 

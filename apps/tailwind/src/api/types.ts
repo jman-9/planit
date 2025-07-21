@@ -1,4 +1,4 @@
-import { ListItem, ListItemStatus } from "../types";
+import { ListItem, ListItemStatus } from "@planit/shared/ListItem";
 
 export interface ListApiInterface {
   getList: () => Promise<ListItem[] | undefined>;

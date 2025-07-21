@@ -2,7 +2,7 @@ import { BucketApi } from "../api/bucketApi";
 import { TodoApi } from "../api/todoApi";
 import OverviewCard from "../components/OverviewCard";
 import RecentListCard from "../components/RecentListCard";
-import { ListItem } from "../types";
+import { ListItem } from "@planit/shared/ListItem";
 import useListDataManager from "../hooks/useListDataManager";
 import Modal from "../ui/Modal";
 import ItemViewEdit, { ItemFormData, ItemFormProps } from "../components/ItemViewEdit";

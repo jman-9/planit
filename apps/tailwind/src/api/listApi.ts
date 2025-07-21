@@ -1,5 +1,5 @@
 import { store } from '../store/store';
-import { getStatus, ListItem, ListItemStatus } from '../types';
+import { getStatus, ListItem, ListItemStatus } from '@planit/shared/ListItem';
 import { ListApiInterface } from './types';
 import { ListSlice } from '../store/types';
 

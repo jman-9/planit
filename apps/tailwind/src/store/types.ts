@@ -1,5 +1,5 @@
 import { Slice } from '@reduxjs/toolkit';
-import { ListItem } from '../types';
+import { ListItem } from '@planit/shared/ListItem';
 
 export type ListSlice = Slice<
   { list: ListItem[] },
