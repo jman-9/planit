@@ -1,8 +1,10 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
+import Store from 'electron-store';
 import path from 'path';
 import { ListItem } from '@planit/shared/ListItem';
 
 
+const store = new Store();
 const isDev = process.env.MODE !== 'build';
 
 function createWindow() {
@@ -22,19 +24,17 @@ function createWindow() {
     win.loadFile(path.join(__dirname, 'renderer/index.html'));
 }
 
-let _list: ListItem[] = [
-  { title: 'i1', updatedAt: new Date().toISOString(), createdAt: new Date().toISOString(), desc: 'd1' },
-  { title: 'i2', updatedAt: new Date().toISOString(), createdAt: new Date().toISOString(), desc: 'd2' },
-  { title: 'i3', updatedAt: new Date().toISOString(), createdAt: new Date().toISOString(), desc: 'd3' },
-];
+let _list: ListItem[] = [];
 
 ipcMain.handle('getList', () => {
+  if(_list.length == 0)
+    _list = store.get('list') as ListItem[] ?? [];
   return _list;
 });
 
 ipcMain.handle('addItem', (_evt, item: ListItem) => {
   _list.push(item);
-  return 'Hello from Main Process!';
+  store.set('list', _list);
 });
 
 ipcMain.handle('getItem', (_evt, title: string) => {
@@ -45,11 +45,13 @@ ipcMain.handle('updateItem', (_evt, title: string, data: ListItem) => {
   const index = _list.findIndex(item => item.title === title);
   if (index !== -1) {
     _list[index] = data;
+    store.set('list', _list);
   }
 });
 
 ipcMain.handle('deleteItem', (_evt, title: string) => {
   _list = _list.filter(item => item.title !== title);
+  store.set('list', _list);
 });
 
 ipcMain.handle('getItemCount', () => {
