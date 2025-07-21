@@ -22,33 +22,38 @@ function createWindow() {
     win.loadFile(path.join(__dirname, 'renderer/index.html'));
 }
 
+let _list: ListItem[] = [
+  { title: 'i1', updatedAt: new Date().toISOString(), createdAt: new Date().toISOString(), desc: 'd1' },
+  { title: 'i2', updatedAt: new Date().toISOString(), createdAt: new Date().toISOString(), desc: 'd2' },
+  { title: 'i3', updatedAt: new Date().toISOString(), createdAt: new Date().toISOString(), desc: 'd3' },
+];
+
 ipcMain.handle('getList', () => {
-  let list: ListItem[] = [
-    { title: 'i1', updatedAt: new Date(), createdAt: new Date(), desc: 'd1' },
-    { title: 'i2', updatedAt: new Date(), createdAt: new Date(), desc: 'd2' },
-    { title: 'i3', updatedAt: new Date(), createdAt: new Date(), desc: 'd3' },
-  ];
-  return list;
+  return _list;
 });
 
-ipcMain.handle('addItem', () => {
+ipcMain.handle('addItem', (_evt, item: ListItem) => {
+  _list.push(item);
   return 'Hello from Main Process!';
 });
 
-ipcMain.handle('getItem', () => {
-  return 'Hello from Main Process!';
+ipcMain.handle('getItem', (_evt, title: string) => {
+  return _list.find((item: ListItem) => item.title === title);
 });
 
-ipcMain.handle('updateItem', () => {
-  return 'Hello from Main Process!';
+ipcMain.handle('updateItem', (_evt, title: string, data: ListItem) => {
+  const index = _list.findIndex(item => item.title === title);
+  if (index !== -1) {
+    _list[index] = data;
+  }
 });
 
-ipcMain.handle('deleteItem', () => {
-  return 'Hello from Main Process!';
+ipcMain.handle('deleteItem', (_evt, title: string) => {
+  _list = _list.filter(item => item.title !== title);
 });
 
 ipcMain.handle('getItemCount', () => {
-  return 'Hello from Main Process!';
+  return _list.length;
 });
 
 
