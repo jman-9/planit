@@ -9,7 +9,7 @@ export default function useListDataManager(listApi: ListApiInterface) {
   const [curViewItem, setCurViewItem] = useState<{oldTitle: string, item: ItemFormData} | null>(null);
   const [updateFlag, setUpdateFlag] = useState(false);
 
-  const getList = (): ListItem[] | undefined => listApi.getList();
+  const getList = async (): Promise<ListItem[] | undefined> => await listApi.getList();
 
   const setViewEditMode = (mode: Mode | 'add' |null, item?: ListItem) => {
     let viewData: {oldTitle: string, item: ItemFormData} | null = null;
@@ -28,7 +28,7 @@ export default function useListDataManager(listApi: ListApiInterface) {
     setUpdateFlag(!updateFlag);
   }
 
-  const reflectItem = (data: ItemFormData, oldTitle?: string) => {
+  const reflectItem = async (data: ItemFormData, oldTitle?: string) => {
     const newData: ListItem = {
       title: data.title,
       createdAt: new Date(),
@@ -39,28 +39,28 @@ export default function useListDataManager(listApi: ListApiInterface) {
     };
 
     if(!oldTitle) {
-      listApi.addItem(newData);
+      await listApi.addItem(newData);
     } else {
-      const item = listApi.getItem(oldTitle);
+      const item = await listApi.getItem(oldTitle);
       if(!item) {
         console.error("Invalid item title:", oldTitle);
         return;
       }
       newData.createdAt = item.createdAt;
-      listApi.updateItem(oldTitle, newData);
+      await listApi.updateItem(oldTitle, newData);
     }
 
     setViewEditMode(null);
     setUpdateFlag(!updateFlag);
   }
 
-  const deleteItem = (title: string) => {
-    const item = listApi.getItem(title);
+  const deleteItem = async (title: string) => {
+    const item = await listApi.getItem(title);
     if(!item) {
       console.error("Invalid item title:", title);
       return;
     }
-    listApi.deleteItem(title);
+    await listApi.deleteItem(title);
     setUpdateFlag(!updateFlag);
   }
 

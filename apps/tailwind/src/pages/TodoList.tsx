@@ -5,9 +5,13 @@ import { CursorGlowBlackButton } from "../ui/CursorGlowBlackButton";
 import ItemViewEdit, { ItemFormData, ItemFormProps } from "../components/ItemViewEdit";
 import useListDataManager from "../hooks/useListDataManager";
 import { TodoApi } from "../api/todoApi";
+import { useState, useEffect } from "react";
 
 export default function ToDoList() {
   const ldm = useListDataManager(TodoApi).listDataManager;
+  const [todoList, setTodoList] = useState<ListItem[]>([]);
+
+  useEffect(() => { ldm.getList().then((list) => setTodoList(list ?? [])); }, [ldm]);
 
   const viewProps: ItemFormProps = {
     onSubmit: (d: ItemFormData) => ldm.reflectItem(d, ldm.curViewItem?.oldTitle),
@@ -15,7 +19,7 @@ export default function ToDoList() {
   };
 
   const listViewProps: ListViewProps = {
-    list: ldm.getList() ?? [],
+    list: todoList,
     onView: (item: ListItem) => ldm.setViewEditMode('view', item),
     onEdit: (item: ListItem) => ldm.setViewEditMode("edit", item),
     onDelete: (item: ListItem) => {

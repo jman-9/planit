@@ -3,32 +3,33 @@ import { getStatus, ListItem, ListItemStatus } from '../types';
 import { ListApiInterface } from './types';
 import { ListSlice } from '../store/types';
 
+
 export default function ListApi(listSlice: ListSlice): ListApiInterface {
-  const getList = (): ListItem[] | undefined => {
+  const getList = async (): Promise<ListItem[] | undefined> => {
     return (store.getState() as any)[listSlice.name]?.list;
   };
 
-  const addItem = (data: ListItem) => {
+  const addItem = async (data: ListItem) => {
     store.dispatch(listSlice.actions.addItem(data));
   };
 
-  const getItem = (title: string): ListItem | undefined => {
-    return getList()?.find((item: ListItem) => item.title === title);
+  const getItem = async (title: string): Promise<ListItem | undefined> => {
+    return (await getList())?.find((item: ListItem) => item.title === title);
   };
 
-  const updateItem = (title: string, data: ListItem) => {
+  const updateItem = async (title: string, data: ListItem) => {
     store.dispatch(listSlice.actions.updateItem({ title, data }));
   };
 
-  const deleteItem = (title: string) => {
+  const deleteItem = async (title: string) => {
     store.dispatch(listSlice.actions.deleteItem(title));
   };
 
-  const getItemCount = (status?: ListItemStatus): number => {
+  const getItemCount = async (status?: ListItemStatus): Promise<number> => {
     if(status) {
-      return getList()?.filter(item => getStatus(item) === status).length || 0;
+      return (await getList())?.filter(item => getStatus(item) === status).length || 0;
     }
-    return getList()?.length || 0;
+    return (await getList())?.length || 0;
   };
 
   return { getList, addItem, getItem, updateItem, deleteItem, getItemCount };

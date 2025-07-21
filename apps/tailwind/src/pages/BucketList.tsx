@@ -5,9 +5,13 @@ import { CursorGlowBlackButton } from "../ui/CursorGlowBlackButton";
 import ItemViewEdit, { ItemFormData, ItemFormProps } from "../components/ItemViewEdit";
 import useListDataManager from "../hooks/useListDataManager";
 import { BucketApi } from "../api/bucketApi";
+import { useEffect, useState } from "react";
 
 export default function BucketList() {
   const ldm = useListDataManager(BucketApi).listDataManager;
+  const [bucketList, setBucketList] = useState<ListItem[]>([]);
+
+  useEffect(() => { ldm.getList().then((list) => setBucketList(list ?? [])); }, [ldm]);
 
   const viewProps: ItemFormProps = {
     onSubmit: (d: ItemFormData) => ldm.reflectItem(d, ldm.curViewItem?.oldTitle),
@@ -15,7 +19,7 @@ export default function BucketList() {
   };
 
   const listViewProps: ListViewProps = {
-    list: ldm.getList() ?? [],
+    list: bucketList,
     onView: (item: ListItem) => ldm.setViewEditMode('view', item),
     onEdit: (item: ListItem) => ldm.setViewEditMode("edit", item),
     onDelete: (item: ListItem) => {
