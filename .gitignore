@@ -25,3 +25,4 @@ dist-ssr
 doc/~$tasks.xlsx
 docs/~$tasks.xlsx
 /docs/ref
+apps/electron/db.json
