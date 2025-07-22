@@ -1,26 +1,26 @@
 import { getStatus, ListItem, ListItemStatus } from '@planit/shared/ListItem';
 import { ListApiInterface } from './types';
 
-export default function ElectronListApi(): ListApiInterface {
+export default function ElectronListApi(api: any): ListApiInterface {
 
   const getList = async (): Promise<ListItem[] | undefined> => {
-    return await window.api?.getList();
+    return await api?.getList();
   };
 
   const addItem = async (data: ListItem) => {
-    await window.api?.addItem(data);
+    await api?.addItem(data);
   };
 
   const getItem = async (title: string): Promise<ListItem | undefined> => {
-    return await window.api?.getItem(title);
+    return await api?.getItem(title);
   };
 
   const updateItem = async (title: string, data: ListItem) => {
-    window.api?.updateItem(title, data);
+    api?.updateItem(title, data);
   };
 
   const deleteItem = async (title: string) => {
-    window.api?.deleteItem(title);
+    api?.deleteItem(title);
   };
 
   const getItemCount = async (status?: ListItemStatus): Promise<number> => {

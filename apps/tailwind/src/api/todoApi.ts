@@ -6,8 +6,8 @@ import ElectronListApi from './electronListApi';
 
 let TodoApiImpl: ListApiInterface;
 
-if(window.env?.isElectron) {
-  TodoApiImpl = ElectronListApi();
+if(window.elecPlanit) {
+  TodoApiImpl = ElectronListApi(window.elecPlanit.todo);
 }
 else {
   TodoApiImpl = ListApi(todoSlice);

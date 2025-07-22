@@ -6,8 +6,8 @@ import ElectronListApi from './electronListApi';
 
 let BucketApiImpl: ListApiInterface;
 
-if(window.env?.isElectron) {
-  BucketApiImpl = ElectronListApi();
+if(window.elecPlanit) {
+  BucketApiImpl = ElectronListApi(window.elecPlanit.bucket);
 }
 else {
   BucketApiImpl = ListApi(bucketSlice);

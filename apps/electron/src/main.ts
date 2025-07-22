@@ -1,10 +1,13 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, ipcMain, IpcMainInvokeEvent } from 'electron';
 import Store from 'electron-store';
 import path from 'path';
 import { ListItem } from '@planit/shared/ListItem';
 
 
-const store = new Store();
+const store = new Store({
+  cwd: process.cwd(),
+  name: 'db'
+});
 const isDev = process.env.MODE !== 'build';
 
 function createWindow() {
@@ -24,39 +27,63 @@ function createWindow() {
     win.loadFile(path.join(__dirname, 'renderer/index.html'));
 }
 
-let _list: ListItem[] = [];
+interface List {
+  name: string,
+  list: ListItem[],
+};
 
-ipcMain.handle('getList', () => {
-  if(_list.length == 0)
-    _list = store.get('list') as ListItem[] ?? [];
-  return _list;
-});
+let _todoList: List = { name:'todo', list:[] };
+let _bucketList: List = { name:'bucket', list:[] };
 
-ipcMain.handle('addItem', (_evt, item: ListItem) => {
-  _list.push(item);
-  store.set('list', _list);
-});
+async function listHandler(list: List, cmd:string, ...args:any[]) {
+  switch(cmd) {
+    case 'getList': {
+      if(list.list.length == 0)
+        list.list = store.get(list.name) as ListItem[] ?? [];
+      return list.list;
+    }
 
-ipcMain.handle('getItem', (_evt, title: string) => {
-  return _list.find((item: ListItem) => item.title === title);
-});
+    case 'addItem': {
+      const [ item ] = args as [ListItem];
+      list.list.push(item);
+      store.set(list.name, list.list);
+      return;
+    }
 
-ipcMain.handle('updateItem', (_evt, title: string, data: ListItem) => {
-  const index = _list.findIndex(item => item.title === title);
-  if (index !== -1) {
-    _list[index] = data;
-    store.set('list', _list);
+    case 'getItem': {
+      const [ title ] = args as [string];
+      return list.list.find((item: ListItem) => item.title === title);
+    }
+
+    case 'updateItem': {
+      const [ title, data ] = args as [string, ListItem];
+      const index = list.list.findIndex(item => item.title === title);
+      if (index !== -1) {
+        list.list[index] = data;
+        store.set(list.name, list.list);
+      }
+      return;
+    }
+
+    case 'deleteItem': {
+      const [ title ] = args as [string];
+      list.list = list.list.filter(item => item.title !== title);
+      store.set(list.name, list.list);
+      return;
+    }
+
+    case 'getItemCount': {
+      return list.list.length;
+    }
   }
+};
+
+ipcMain.handle('todo', async (_evt:IpcMainInvokeEvent, cmd:string, ...args:any[]) => {
+  return await listHandler(_todoList, cmd, ...args);
 });
 
-ipcMain.handle('deleteItem', (_evt, title: string) => {
-  _list = _list.filter(item => item.title !== title);
-  store.set('list', _list);
+ipcMain.handle('bucket', async (_evt:IpcMainInvokeEvent, cmd, ...args) => {
+  return await listHandler(_bucketList, cmd, ...args);
 });
-
-ipcMain.handle('getItemCount', () => {
-  return _list.length;
-});
-
 
 app.whenReady().then(createWindow);
