@@ -1,18 +1,43 @@
 {
   "name": "planit-electron",
+  "version": "0.0.1",
+  "description": "Standalone planner built with Electron + React",
+  "author": "jman",
   "main": "dist/main.js",
   "scripts": {
-    "build": "pnpm exec tsc",
-    "dev": "concurrently \"pnpm --dir ../tailwind dev\" \"tsup --watch\" \"wait-on dist/preload.js dist/main.js && electronmon dist/main.js\""
+    "dev": "concurrently \"pnpm --dir ../tailwind dev\" \"tsup --watch\" \"wait-on dist/preload.js dist/main.js && electronmon dist/main.js\"",
+    "build": "pnpm --dir ../tailwind build && tsup",
+    "bundle": "electron-builder --win portable"
+  },
+  "build": {
+    "appId": "com.jman.planit",
+    "productName": "PlanIt",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "../tailwind/dist/**/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        }
+      ]
+    }
   },
   "dependencies": {
-    "cross-env": "^7.0.3",
-    "electron": "^37.2.2",
     "electron-store": "^10.1.0"
   },
   "devDependencies": {
     "@types/node": "^24.0.14",
     "concurrently": "^9.2.0",
+    "cross-env": "^7.0.3",
+    "electron": "^37.2.2",
+    "electron-builder": "^26.0.12",
     "electronmon": "^2.0.3",
     "ts-node": "^10.9.2",
     "tsup": "^8.5.0",
