@@ -1,7 +1,11 @@
-import { app, BrowserWindow, ipcMain, IpcMainInvokeEvent } from 'electron';
+import { app, BrowserWindow, ipcMain, IpcMainInvokeEvent, Menu } from 'electron';
 import Store from 'electron-store';
 import path from 'path';
 import { ListItem } from '@planit/shared/ListItem';
+
+declare global {
+  const MODE: string;
+}
 
 app.setName('jman.planit');
 const store = new Store({ name: 'db' });
@@ -18,10 +22,13 @@ function createWindow() {
     },
   });
 
-  if(isDev)
+  if(isDev) {
     win.loadURL('http://localhost:5173');
-  else
+  }
+  else {
+    Menu.setApplicationMenu(null);
     win.loadFile(path.join(__dirname, 'renderer/index.html'));
+  }
 }
 
 interface List {
