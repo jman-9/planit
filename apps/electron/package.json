@@ -6,7 +6,8 @@
   "main": "dist/main.js",
   "scripts": {
     "dev": "concurrently \"pnpm --dir ../tailwind dev\" \"tsup --watch\" \"wait-on dist/preload.js dist/main.js && electronmon dist/main.js\"",
-    "build": "pnpm --dir ../tailwind build && tsup",
+    "build": "cross-env MODE=build tsup && pnpm --dir ../tailwind build:electron",
+    "start": "electron dist/main.js",
     "bundle": "electron-builder --win portable"
   },
   "build": {
@@ -24,7 +25,9 @@
       "target": [
         {
           "target": "portable",
-          "arch": ["x64"]
+          "arch": [
+            "x64"
+          ]
         }
       ]
     }
@@ -36,7 +39,7 @@
     "@types/node": "^24.0.14",
     "concurrently": "^9.2.0",
     "cross-env": "^7.0.3",
-    "electron": "^37.2.2",
+    "electron": "^37.2.4",
     "electron-builder": "^26.0.12",
     "electronmon": "^2.0.3",
     "ts-node": "^10.9.2",

@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
 import { useEffect } from "react";
 import Sidebar from "./components/Sidebar";
 import Dashboard from "./pages/Dashboard";
@@ -7,6 +7,7 @@ import BucketList from "./pages/BucketList";
 import Settings from "./pages/Settings";
 import { store } from "./store/store";
 
+const Router = _USE_ELECTRON_ ? HashRouter : BrowserRouter;
 
 export default function App() {
   useEffect(() => {
@@ -16,7 +17,7 @@ export default function App() {
   }, []);
 
   return (
-    <BrowserRouter>
+    <Router>
       <div className="flex min-h-screen dark:bg-gray-950 dark:text-gray-100">
         <Sidebar />
         <div className="min-w-0 max-w-[900px] flex flex-1 flex-col">
@@ -33,6 +34,6 @@ export default function App() {
           </footer>
         </div>
       </div>
-    </BrowserRouter>
+    </Router>
   );
 }

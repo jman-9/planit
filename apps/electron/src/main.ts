@@ -3,12 +3,9 @@ import Store from 'electron-store';
 import path from 'path';
 import { ListItem } from '@planit/shared/ListItem';
 
-
-const store = new Store({
-  cwd: process.cwd(),
-  name: 'db'
-});
-const isDev = process.env.MODE !== 'build';
+app.setName('jman.planit');
+const store = new Store({ name: 'db' });
+const isDev = MODE !== 'build';
 
 function createWindow() {
   const win = new BrowserWindow({

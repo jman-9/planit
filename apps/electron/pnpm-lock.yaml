@@ -22,7 +22,7 @@ importers:
         specifier: ^7.0.3
         version: 7.0.3
       electron:
-        specifier: ^37.2.2
+        specifier: ^37.2.4
         version: 37.2.4
       electron-builder:
         specifier: ^26.0.12

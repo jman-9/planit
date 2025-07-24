@@ -11,6 +11,8 @@ declare global {
       todo: any;
     };
   }
+
+  const _USE_ELECTRON_: boolean;
 }
 
 
