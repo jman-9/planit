@@ -32,6 +32,12 @@
       ]
     }
   },
+  "electronmon": {
+    "patterns": [
+      "!**/*",
+      "dist/**"
+    ]
+  },
   "dependencies": {
     "electron-store": "^10.1.0"
   },

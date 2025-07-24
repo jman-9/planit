@@ -7,19 +7,29 @@ declare global {
   const MODE: string;
 }
 
-app.setName('jman.planit');
-const store = new Store({ name: 'db' });
 const isDev = MODE !== 'build';
 
+app.setName('jman.planit');
+const store = isDev ? new Store({ cwd: process.cwd(), name: 'db' }) : new Store({ name: 'db' });
+
 function createWindow() {
+  const bounds = store.get('windowBounds') as Electron.Rectangle | undefined;
+
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: bounds?.width ?? 800,
+    height: bounds?.height ?? 600,
+    ...(bounds?.x !== undefined && bounds?.y !== undefined
+    ? { x: bounds.x, y: bounds.y }
+    : {}),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
       nodeIntegration: false,
     },
+  });
+
+  win.on('close', () => {
+    store.set('windowBounds', win.getBounds());
   });
 
   if(isDev) {
