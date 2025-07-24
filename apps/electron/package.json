@@ -13,6 +13,7 @@
   "build": {
     "appId": "com.jman.planit",
     "productName": "PlanIt",
+    "icon": "../../public/planit.png",
     "directories": {
       "output": "release",
       "buildResources": "build"
@@ -20,6 +21,12 @@
     "files": [
       "dist/**/*",
       "../tailwind/dist/**/*"
+    ],
+    "extraFiles": [
+      {
+        "from": "../../LICENSE",
+        "to": "LICENSE.planit.txt"
+      }
     ],
     "win": {
       "target": [
