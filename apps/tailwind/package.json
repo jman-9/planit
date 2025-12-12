@@ -1,5 +1,6 @@
 {
   "name": "tailwind",
+  "homepage": "https://jman-9.github.io/planit/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,11 +8,15 @@
     "dev": "vite --host",
     "build": "tsc -b && vite build",
     "build:electron": "cross-env MODE=electron tsc -b && cross-env MODE=electron vite build",
+    "build:github": "cross-env WEBBASEPATH=/planit/ tsc -b && cross-env WEBBASEPATH=/planit/ vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "pnpm run build:github",
+    "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.5",
+    "gh-pages": "^6.3.0",
     "tailwindcss": "^4.1.5"
   },
   "dependencies": {
